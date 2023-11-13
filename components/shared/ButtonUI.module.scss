@@ -1,0 +1,30 @@
+@use "../../styles/colors" as color;
+@import "../../styles/mixin";
+
+.btn__pill {
+  width: 60%;
+  height: 34px;
+  margin: 0 auto;
+  @include center-both;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.$primary-color;
+    color: color.$assistant-gray-color;
+  }
+}
+
+.btn__link {
+  margin-top: 0.5rem;
+  @include center-both;
+  background-color: unset;
+  border: none;
+  @include text-styles(1rem, 400, color.$gray-1);
+  cursor: pointer;
+
+  &:hover {
+    color: color.$primary-color;
+  }
+}
