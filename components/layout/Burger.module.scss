@@ -1,64 +1,68 @@
 @use "../../styles/colors" as color;
 
-.navbar_toggle {
-  visibility: hidden;
-  position: absolute;
+.flexBox {
+  width: 30%;
+  height: 5rem;
+  position: relative;
 
-  &:checked ~ .nav {
-    transform: scale(1, 1);
+  .navbar_toggle {
+    visibility: hidden;
+    position: absolute;
+
+    &:checked ~ .nav {
+      transform: scale(1, 1);
+    }
+
+    &:checked ~ .nav .nav_item {
+      transition: opacity 0.2s ease-out 0.15s;
+      opacity: 1;
+    }
   }
 
-  &:checked ~ .nav .nav_item {
-    transition: opacity 0.2s ease-out 0.15s;
-    opacity: 1;
+  .nav {
+    position: absolute;
+    top: 100%;
+    background: color.$gray-1;
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 0.3s ease-out;
+
+    &_item {
+      margin: 1.4rem 0;
+      opacity: 0;
+    }
   }
-}
 
-.nav {
-  position: absolute;
-  top: 100%;
-  background: color.$gray-1;
-  width: 100%;
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 0.3s ease-out;
+  .navbar_toggle_label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
 
-  &_item {
-    margin: 1.4rem 0;
-    opacity: 0;
-  }
-}
-
-.navbar_toggle_label {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-
-  .hamburger {
-    width: 30px;
-    height: 3px;
-    background: color.$secondary-light-color;
-    position: relative;
-
-    &::before,
-    &::after {
-      content: "";
+    .hamburger {
       width: 30px;
       height: 3px;
-      background: color.$secondary-light-color;
-      position: absolute;
-      left: 0;
-    }
+      background: color.$gray-10;
+      position: relative;
 
-    &::before {
-      top: 8px;
-    }
+      &::before,
+      &::after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        background: color.$gray-10;
+        position: absolute;
+        left: 0;
+      }
 
-    &::after {
-      bottom: 8px;
+      &::before {
+        top: 8px;
+      }
+
+      &::after {
+        bottom: 8px;
+      }
     }
   }
 }

@@ -1,0 +1,10 @@
+@use "../../styles/colors" as color;
+@import "../../styles/mixin";
+
+.timeCard_container {
+  width: 18rem;
+  border: 2px solid black;
+  border-radius: 30px;
+  @include center-both;
+  gap: 1rem;
+}

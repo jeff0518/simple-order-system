@@ -2,7 +2,7 @@ import style from "./Burger.module.scss";
 
 function Burger() {
   return (
-    <>
+    <div className={style.flexBox}>
       <input
         type="checkbox"
         className={style.navbar_toggle}
@@ -24,7 +24,7 @@ function Burger() {
       <label className={style.navbar_toggle_label} htmlFor="navbar_toggle">
         <span className={style.hamburger} />
       </label>
-    </>
+    </div>
   );
 }
 

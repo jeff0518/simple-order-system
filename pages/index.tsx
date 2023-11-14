@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Burger from "@/components/layout/Burger";
 
 import style from "./index.module.scss";
 
@@ -12,8 +11,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={style.div}>
-        這是點餐系統的首頁，也是登錄頁面 <Burger />
+      <div className={style.container}>
+        <p>這是點餐系統的首頁，也是登錄頁面</p>
       </div>
     </>
   );
