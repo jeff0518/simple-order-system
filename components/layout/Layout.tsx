@@ -1,5 +1,6 @@
 import Burger from "./Burger";
 import TimeCard from "./TimeCard";
+import Footer from "./footer/Footer";
 
 import style from "./Layout.module.scss";
 
@@ -15,6 +16,7 @@ function Layout(props: LayoutProps) {
         <TimeCard />
       </div>
       {props.children}
+      <Footer />
     </>
   );
 }

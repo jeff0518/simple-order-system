@@ -1,0 +1,12 @@
+@use "../../../styles/colors" as color;
+@import "../../../styles/mixin";
+
+.footerCard_container {
+  width: 10rem;
+  height: 100%;
+  border-radius: 30px;
+  background-color: color.$gray-9;
+  @include text-styles(1rem, 500, color.$gray-2);
+  @include center-both;
+  cursor: pointer;
+}

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import AuthForm from "@/components/auth/AuthForm";
 
 import style from "./index.module.scss";
 
@@ -12,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={style.container}>
-        <p>這是點餐系統的首頁，也是登錄頁面</p>
+        <AuthForm />
       </div>
     </>
   );

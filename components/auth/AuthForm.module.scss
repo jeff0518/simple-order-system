@@ -1,0 +1,18 @@
+@use "../../styles/colors" as color;
+@import "../../styles/mixin";
+
+.authForm_container {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: color.$brand-light-color;
+  border-radius: 30px;
+  .auth {
+    width: 100%;
+    .bnt_box {
+      width: 100%;
+    }
+  }
+}
