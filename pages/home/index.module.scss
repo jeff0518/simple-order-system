@@ -1,0 +1,10 @@
+@use "../../styles/colors" as color;
+@import "../../styles/mixin";
+
+.div {
+  width: 100%;
+  height: calc(100vh - 5rem - 2.5rem);
+  padding: 0 15rem;
+  background-color: color.$gray-6;
+  @include center-both;
+}

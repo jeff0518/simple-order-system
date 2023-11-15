@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "isOrder": true,
+    "total": 1234,
+    "time": "1小時12分鐘"
+  },
+  {
+    "id": 2,
+    "isOrder": false,
+    "total": 0,
+    "time": ""
+  },
+  {
+    "id": 3,
+    "isOrder": true,
+    "total": 2345,
+    "time": "2小時12分鐘"
+  },
+  {
+    "id": 4,
+    "isOrder": true,
+    "total": 324,
+    "time": "3小時1分鐘"
+  }
+]
