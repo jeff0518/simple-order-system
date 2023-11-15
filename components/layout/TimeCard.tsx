@@ -15,11 +15,12 @@ function TimeCard() {
       clearInterval(intervalId);
     };
   }, []);
+  // 出現Error: Text content does not match server-rendered HTML. 因此改成這樣
+  const formattedTime = currentTime.format("MMMM Do YYYY, h:mm:ss");
+
   return (
     <div className={style.timeCard_container}>
-      <div className={style.timeCard_card}>
-        {currentTime.format("MMMM Do YYYY, h:mm:ss")}
-      </div>
+      <div className={style.timeCard_card}>{formattedTime}</div>
     </div>
   );
 }

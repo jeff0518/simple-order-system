@@ -5,8 +5,16 @@
   width: 10rem;
   height: 100%;
   border-radius: 30px;
-  background-color: color.$gray-9;
+  background-color: color.$gray-8;
   @include text-styles(1rem, 500, color.$gray-2);
   @include center-both;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
   cursor: pointer;
+
+  &:hover {
+    background-color: color.$gray-2;
+    @include text-styles(1rem, 500, color.$gray-8);
+    transform: scale(1.1);
+  }
 }

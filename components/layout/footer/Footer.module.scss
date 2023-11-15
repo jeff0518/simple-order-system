@@ -8,4 +8,10 @@
   align-items: center;
   justify-content: space-between;
   background-color: color.$primary-color;
+
+  .footer_left {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+  }
 }
