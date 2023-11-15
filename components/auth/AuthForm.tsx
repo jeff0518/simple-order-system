@@ -9,19 +9,19 @@ function AuthForm() {
   return (
     <div className={style.authForm_container}>
       <section className={style.auth}>
-        <h1>登入</h1>
+        <p>登入</p>
         <form onSubmit={submitHandler}>
           <InputUI
             inputId="text"
             inputType="text"
-            inputStyle="control"
+            inputStyle="input_control"
             inputText="帳號:"
             inputPlaceholder="請輸入帳號"
           />
           <InputUI
             inputId="password"
             inputType="password"
-            inputStyle="control"
+            inputStyle="input_control"
             inputText="密碼:"
             inputPlaceholder="請輸入密碼"
           />

@@ -6,6 +6,7 @@
   margin-bottom: 0.5rem;
 
   label {
+    width: 100%;
     display: block;
     @include text-styles(1rem, 500, color.$gray-1);
     margin-bottom: 0.5rem;
