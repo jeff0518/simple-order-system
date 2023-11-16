@@ -23,3 +23,25 @@
     text-align: left;
   }
 }
+
+.input_search {
+  display: flex;
+  align-items: center;
+
+  label {
+    width: 30%;
+    display: block;
+    @include text-styles(1.5rem, 500, color.$gray-1);
+  }
+
+  input {
+    padding: 0.25rem;
+    width: 70%;
+    border: 1px solid color.$gray-1;
+    border-radius: 4px;
+    background-color: color.$gray-3;
+    font: inherit;
+    color: color.$brand-color;
+    text-align: left;
+  }
+}

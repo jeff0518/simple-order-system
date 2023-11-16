@@ -1,0 +1,22 @@
+@use "../../styles/colors" as color;
+@import "../../styles/mixin";
+
+.searchForm_container {
+  width: 100%;
+  height: 50%;
+  margin: 0 15rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: color.$brand-light-color;
+  border-radius: 30px;
+
+  .searchForm_input {
+    width: 70%;
+  }
+
+  .searchForm_bnt {
+    width: 30%;
+    margin-right: 0.5rem;
+  }
+}
