@@ -1,3 +1,4 @@
+import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
 import ButtonUI from "../shared/ButtonUI";
 
 import style from "./TableCard.module.scss";
@@ -18,8 +19,12 @@ function TableCard(props: TableCardProps) {
       <div className={style.title}>{tableId}桌</div>
       {/* 顯示資訊 */}
       <div className={style.information}>
-        <div>金額：{totalAmount}</div>
-        <div>用餐時間：{diningTime}</div>
+        <div className={style.info_icon}>
+          <AiFillDollarCircle />：{totalAmount}
+        </div>
+        <div className={style.info_icon}>
+          <AiFillClockCircle />：{diningTime}
+        </div>
       </div>
       {/* 控制面板（點餐、結帳） */}
       <div className={style.control}>

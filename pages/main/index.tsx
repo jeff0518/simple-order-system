@@ -1,10 +1,10 @@
-import Home from "@/components/home/Home";
+import Main from "@/components/main/Main";
 
 import style from "./index.module.scss";
 function HomePage() {
   return (
     <div className={style.div}>
-      <Home />
+      <Main />
     </div>
   );
 }
