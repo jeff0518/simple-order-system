@@ -30,7 +30,7 @@
 
   label {
     width: 30%;
-    display: block;
+    @include center-both;
     @include text-styles(1.5rem, 500, color.$gray-1);
   }
 
