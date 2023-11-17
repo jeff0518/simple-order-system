@@ -1,17 +1,10 @@
-import SearchForm from "@/components/search/SearchForm";
-
+import ListCard from "@/components/card/ListCard";
 import style from "./index.module.scss";
 
 function Employee() {
-  const queryEmployeeIdHandler = () => {};
   return (
     <div className={style.employee_container}>
-      <SearchForm
-        inputId="queryEmployeeId"
-        inputPlaceholder="請輸入員工編號"
-        inputText="員工編號:"
-        onClick={queryEmployeeIdHandler}
-      />
+      <ListCard jobTitle="服務員" name="Jeff" />
     </div>
   );
 }

@@ -1,0 +1,30 @@
+@use "../../../styles/colors" as color;
+@import "../../../styles/_mixin.scss";
+
+.attendance_container {
+  width: 100%;
+  height: calc(100vh - 5rem - 2.5rem);
+  background-color: color.$gray-6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .info {
+    width: 75%;
+    height: 5rem;
+    margin: 3rem 0 1rem 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    border-radius: 15px;
+    background-color: color.$brand-color;
+    @include center-both;
+    @include text-styles(1.5rem, 500, color.$gray-10);
+    gap: 3rem;
+  }
+
+  .attendance {
+    width: 75%;
+    margin-bottom: 0.5rem;
+    overflow-y: scroll;
+  }
+}
