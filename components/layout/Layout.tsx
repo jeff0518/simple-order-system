@@ -15,7 +15,8 @@ function Layout(props: LayoutProps) {
         <Burger />
         <TimeCard />
       </div>
-      {props.children}
+      <div className={style.layout_children}>{props.children}</div>
+
       <Footer />
     </>
   );
