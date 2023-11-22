@@ -4,12 +4,65 @@
 .memberInfo_container {
   width: 80%;
   height: 100%;
-  display: flex;
+  @include center-both;
   flex-direction: column;
   border: 2px solid color.$gray-10;
   border-radius: 30px;
   @include text-styles(1rem, 500, color.$gray-10);
   background-color: color.$brand-light-color;
-  @include center-both;
-  flex-direction: column;
+
+  .container_info {
+    width: 100%;
+    height: 50%;
+    @include center-both;
+    flex-direction: column;
+    border-bottom: 5px solid color.$gray-10;
+
+    &_data {
+      width: 100%;
+      margin-top: 1rem;
+      @include center-both;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    &_ctrlInterface {
+      width: 30%;
+      margin: 1rem 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .container_spendingRecords {
+    width: 90%;
+    height: 100%;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: color.$gray-4;
+    border-radius: 30px;
+    overflow: hidden;
+
+    .spendingRecords_title {
+      width: 60%;
+      margin: 0 auto;
+      display: flex;
+      gap: 2rem;
+      .date,
+      .point {
+        width: 100%;
+        @include center-both;
+      }
+    }
+
+    .spendingRecords_info {
+      width: 100%;
+      height: 80%;
+      overflow-y: scroll;
+    }
+  }
 }

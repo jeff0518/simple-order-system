@@ -4,7 +4,7 @@ import ButtonUI from "@/components/shared/ButtonUI";
 import style from "./ChangeInformation.module.scss";
 function ChangeInformation() {
   return (
-    <div className={style.changeInformation_container}>
+    <form className={style.changeInformation_container}>
       <div className={style.info_data}>
         <ChangeInfoCard fistText="姓名" lastText="jeff" type="string" />
         <ChangeInfoCard fistText="職稱" lastText="服務員" type="string" />
@@ -24,7 +24,7 @@ function ChangeInformation() {
       <div className={style.info_ctrl}>
         <ButtonUI btnStyle="btn__pill" text="完成" onClick={() => {}} />
       </div>
-    </div>
+    </form>
   );
 }
 export default ChangeInformation;

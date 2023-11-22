@@ -1,0 +1,20 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.spendingRecordsCard_container {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  // justify-content: space-around;
+  @include text-styles(1rem, 500, color.$gray-10);
+
+  .time,
+  .spend {
+    width: 100%;
+    border: 2px solid color.$gray-10;
+    border-radius: 30px;
+    background-color: color.$gray-1;
+    @include center-both;
+  }
+}

@@ -1,0 +1,31 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.addSpendInfo_container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid color.$gray-10;
+  border-radius: 30px;
+  @include text-styles(1rem, 500, color.$gray-10);
+  background-color: color.$brand-light-color;
+
+  .info_data {
+    width: 100%;
+    height: 70%;
+    @include center-both;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info_ctrl {
+    width: 20%;
+    height: 30%;
+    margin-left: 58%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
