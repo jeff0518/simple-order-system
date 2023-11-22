@@ -1,0 +1,28 @@
+@use "../../styles/colors" as color;
+@import "/styles/mixin";
+
+.changeInfoCard_container {
+  width: 100%;
+  @include center-both;
+  margin-top: 2rem;
+  gap: 2rem;
+
+  .changeInfo_fist {
+    width: 20%;
+    @include center-both;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 15px;
+    background-color: color.$gray-3;
+  }
+
+  .changeInfo_last {
+    width: 30%;
+    height: 1.5rem;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 15px;
+    background-color: color.$gray-3;
+  }
+}

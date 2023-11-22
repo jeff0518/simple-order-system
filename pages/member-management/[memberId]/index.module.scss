@@ -1,0 +1,15 @@
+@use "../../../styles/colors" as color;
+@import "../../../styles/mixin";
+
+.memberInfo_container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid color.$gray-10;
+  border-radius: 30px;
+  @include text-styles(1rem, 500, color.$gray-10);
+  background-color: color.$brand-light-color;
+  @include center-both;
+  flex-direction: column;
+}
