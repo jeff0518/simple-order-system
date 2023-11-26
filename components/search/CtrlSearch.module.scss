@@ -1,0 +1,22 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.ctrlSearch_container {
+  width: 100%;
+  text-align: center;
+  @include center-both;
+  gap: 0.5rem;
+
+  // .title {
+  //   height: 2rem;
+  // }
+
+  .date {
+    height: 2rem;
+    .customDatePicker {
+      border-radius: 30px;
+      height: 2rem;
+      text-align: center;
+    }
+  }
+}
