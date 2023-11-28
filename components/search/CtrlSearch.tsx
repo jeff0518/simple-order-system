@@ -2,6 +2,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { useState } from "react";
+import ButtonUI from "../shared/ButtonUI";
 import style from "./CtrlSearch.module.scss";
 function CtrlSearch() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -16,6 +17,9 @@ function CtrlSearch() {
           showMonthYearPicker
           className={style.customDatePicker}
         />
+      </div>
+      <div className={style.button}>
+        <ButtonUI text="查詢" btnStyle="btn__pill" onClick={() => {}} />
       </div>
     </div>
   );
