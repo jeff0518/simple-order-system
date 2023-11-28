@@ -17,6 +17,22 @@
   }
 }
 
+.btn__pill__small {
+  width: 50%;
+  height: 1rem;
+  margin: 0 auto;
+  @include center-both;
+  @include text-styles(0.75rem, 500, color.$gray-10);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.$primary-color;
+    color: color.$assistant-gray-color;
+  }
+}
+
 .btn__link {
   margin-top: 0.5rem;
   @include center-both;

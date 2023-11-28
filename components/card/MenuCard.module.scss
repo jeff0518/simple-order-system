@@ -1,0 +1,34 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.menuCard_container {
+  width: 12rem;
+  height: 16rem;
+  border: 1px solid color.$gray-8;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &_img {
+    width: 100%;
+    height: 50%;
+    border-radius: 30px;
+  }
+
+  &_info {
+    width: 100%;
+    height: 50%;
+    @include center-both;
+    flex-direction: column;
+    @include text-styles(1rem, 500, color.$gray-8);
+
+    .controlPanel {
+      width: 80%;
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.25rem;
+    }
+  }
+}
