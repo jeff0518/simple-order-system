@@ -16,6 +16,7 @@
     height: 70%;
     @include center-both;
     flex-direction: column;
+    gap: 0.5rem;
   }
 
   .info_ctrl {

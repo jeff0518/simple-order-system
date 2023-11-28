@@ -14,16 +14,16 @@ function Burger() {
             <div className={style.nav_link}>首頁</div>
           </li>
           <li className={style.nav_item}>
-            <div className={style.nav_link}>商品</div>
+            <div className={style.nav_link}>商品內容</div>
           </li>
           <li className={style.nav_item}>
-            <div className={style.nav_link}>數據</div>
+            <div className={style.nav_link}>數據資料庫</div>
           </li>
           <li className={style.nav_item}>
-            <div className={style.nav_link}>會員</div>
+            <div className={style.nav_link}>會員資料庫</div>
           </li>
           <li className={style.nav_item}>
-            <div className={style.nav_link}>員工</div>
+            <div className={style.nav_link}>員工資料庫</div>
           </li>
         </ul>
       </nav>
