@@ -1,0 +1,70 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.menuIdModal_container {
+  width: 80%;
+  padding: 1rem;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid color.$gray-8;
+  border-radius: 30px;
+  background-color: color.$brand-light-color;
+  z-index: 100;
+  overflow: hidden;
+
+  .infoBox {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+    .image {
+      width: 100%;
+      border-radius: 30px;
+
+      &_img {
+        width: 100%;
+        height: 70%;
+        border-radius: 30px;
+      }
+    }
+
+    .info {
+      width: 100%;
+      height: 10rem;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      @include text-styles(1rem, 500, color.$gray-8);
+      gap: 0.5rem;
+    }
+  }
+
+  .controlPanel {
+    width: 80%;
+    margin: 0.5rem auto;
+    display: flex;
+    gap: 2rem;
+    @include text-styles(0.75rem, 500, color.$gray-10);
+
+    &_label {
+      width: 70%;
+      height: 1.5rem;
+      background-color: color.$gray-1;
+      border-radius: 10px;
+      @include center-both;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+        background-color: color.$primary-color;
+        color: color.$assistant-gray-color;
+      }
+    }
+
+    &_input {
+      display: none;
+    }
+  }
+}
