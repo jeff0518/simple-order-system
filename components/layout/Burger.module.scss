@@ -5,6 +5,7 @@
   width: 30%;
   height: 5rem;
   position: relative;
+  z-index: 100;
 
   .navbar_toggle {
     width: 100%;
@@ -17,6 +18,10 @@
     }
 
     &:checked ~ .nav .nav_item {
+      transition: opacity 0.2s ease-out 0.15s;
+      opacity: 1;
+    }
+    &:checked ~ .nav .nav_phone {
       transition: opacity 0.2s ease-out 0.15s;
       opacity: 1;
     }
@@ -34,10 +39,26 @@
     transform-origin: top;
     transition: transform 0.3s ease-out;
 
+    .nav_link {
+      color: color.$primary-color;
+    }
+
     &_item {
+      display: none;
       margin: 1.4rem 0;
       padding-left: 1rem;
       opacity: 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: color.$gray-1;
+      }
+    }
+    &_phone {
+      margin: 1.4rem 0;
+      padding-left: 1rem;
+      opacity: 0;
+      cursor: pointer;
 
       &:hover {
         background-color: color.$gray-1;
@@ -73,6 +94,32 @@
 
       &::after {
         bottom: 8px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .flexBox {
+    width: 30%;
+    height: 5rem;
+    position: relative;
+    z-index: 100;
+
+    .nav {
+      &_item {
+        display: block;
+        margin: 1.4rem 0;
+        padding-left: 1rem;
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover {
+          background-color: color.$gray-1;
+        }
+      }
+      &_phone {
+        display: none;
       }
     }
   }

@@ -1,29 +1,79 @@
+import { useRef } from "react";
+import Link from "next/link";
+
 import style from "./Burger.module.scss";
 
 function Burger() {
+  const checkboxRef = useRef<HTMLInputElement>(null);
+  // 點擊後收起漢堡排
+  const linkClickHandler = () => {
+    if (checkboxRef.current) {
+      checkboxRef.current.checked = false;
+    }
+  };
   return (
     <div className={style.flexBox}>
       <input
         type="checkbox"
         className={style.navbar_toggle}
         id="navbar_toggle"
+        ref={checkboxRef}
       />
       <nav className={style.nav}>
         <ul className={style.nav_list}>
-          <li className={style.nav_item}>
-            <div className={style.nav_link}>首頁</div>
+          <li className={`${style.nav_item}`}>
+            <Link
+              className={style.nav_link}
+              href="/main"
+              onClick={linkClickHandler}
+            >
+              首頁
+            </Link>
           </li>
-          <li className={style.nav_item}>
-            <div className={style.nav_link}>商品內容</div>
+          <li className={`${style.nav_item}`}>
+            <Link
+              href="/menu-management"
+              className={style.nav_link}
+              onClick={linkClickHandler}
+            >
+              商品內容
+            </Link>
           </li>
-          <li className={style.nav_item}>
-            <div className={style.nav_link}>數據資料庫</div>
+          <li className={`${style.nav_item}`}>
+            <Link
+              href="/data"
+              className={style.nav_link}
+              onClick={linkClickHandler}
+            >
+              數據資料庫
+            </Link>
           </li>
-          <li className={style.nav_item}>
-            <div className={style.nav_link}>會員資料庫</div>
+          <li className={`${style.nav_item}`}>
+            <Link
+              href="/member-management"
+              className={style.nav_link}
+              onClick={linkClickHandler}
+            >
+              會員資料庫
+            </Link>
           </li>
-          <li className={style.nav_item}>
-            <div className={style.nav_link}>員工資料庫</div>
+          <li className={`${style.nav_item}`}>
+            <Link
+              href="/employee"
+              className={style.nav_link}
+              onClick={linkClickHandler}
+            >
+              員工資料庫
+            </Link>
+          </li>
+          <li className={`${style.nav_phone}`}>
+            <Link
+              href="/data"
+              className={style.nav_link}
+              onClick={linkClickHandler}
+            >
+              數據資料庫
+            </Link>
           </li>
         </ul>
       </nav>

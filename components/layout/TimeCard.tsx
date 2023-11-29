@@ -16,7 +16,7 @@ function TimeCard() {
     };
   }, []);
   // 出現Error: Text content does not match server-rendered HTML. 因此改成這樣
-  const formattedTime = currentTime.format("MMMM Do YYYY, h:mm:ss");
+  const formattedTime = currentTime.format("MMMM Do YYYY, h:mm");
 
   return (
     <div className={style.timeCard_container}>
