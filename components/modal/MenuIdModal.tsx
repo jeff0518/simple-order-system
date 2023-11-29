@@ -1,6 +1,5 @@
 import Image from "next/image";
 import ButtonUI from "../shared/ButtonUI";
-import InputUI from "../shared/InputUI";
 import ChangeInfoCard from "../card/ChangeInfoCard";
 import { AiOutlineFolderAdd } from "react-icons/ai";
 
