@@ -22,12 +22,11 @@ export async function CreateUser(account: string, password: string) {
 
     const data = response.data;
 
-    if (response.status !== 200) {
+    if (response.status >= 200 && response.status < 300) {
+      return data;
+    } else {
       throw new Error(data.message || "Something went wrong");
     }
-    console.log(data);
-
-    return data;
   } catch (error) {
     // 處理錯誤
     console.error(error);
