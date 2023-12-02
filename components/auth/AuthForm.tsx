@@ -9,7 +9,7 @@ import style from "./AuthForm.module.scss";
 import { signIn } from "next-auth/react";
 
 function AuthForm() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const accountInputRef = useRef<HTMLInputElement>(null!);
   const passwordInputRef = useRef<HTMLInputElement>(null!);
   const router = useRouter();
@@ -24,9 +24,17 @@ function AuthForm() {
 
     const enterAccount = accountInputRef.current.value;
     const enterPassword = passwordInputRef.current.value;
-    console.log(enterAccount, enterPassword);
+
     if (isLogin) {
-      console.log("isLogin");
+      const result = await signIn("credentials", {
+        redirect: false,
+        account: enterAccount,
+        password: enterPassword,
+      });
+
+      if (result && !result.error) {
+        router.replace("/main");
+      }
     } else {
       try {
         const result = await CreateUser(enterAccount, enterPassword);
@@ -35,19 +43,6 @@ function AuthForm() {
         console.log(error);
       }
     }
-
-    // try {
-    //   const result = await signIn("credentials", {
-    //     redirect: false,
-    //     account: enterAccount,
-    //     password: enterPassword,
-    //   });
-    //   if (result && !result.error) {
-    //     router.replace("/main");
-    //   }
-    // } catch (error) {
-    //   console.error("Sign-in error:", error);
-    // }
   }
 
   return (
