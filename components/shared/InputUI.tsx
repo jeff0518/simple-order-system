@@ -6,10 +6,18 @@ interface InputUIProps {
   inputText: string;
   inputStyle: string;
   inputPlaceholder: string;
+  inputRef: React.RefObject<HTMLInputElement>;
 }
 
 function InputUI(props: InputUIProps) {
-  const { inputId, inputType, inputText, inputStyle, inputPlaceholder } = props;
+  const {
+    inputId,
+    inputType,
+    inputText,
+    inputStyle,
+    inputPlaceholder,
+    inputRef,
+  } = props;
   return (
     <div className={style[inputStyle]}>
       <label htmlFor={inputId}>{inputText}</label>
@@ -17,6 +25,7 @@ function InputUI(props: InputUIProps) {
         type={inputType}
         id={inputId}
         placeholder={inputPlaceholder}
+        ref={inputRef}
         required
       />
     </div>

@@ -3,7 +3,7 @@ import style from "./ButtonUI.module.scss";
 interface ButtonUIProps {
   text: string;
   btnStyle: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function ButtonUI(props: ButtonUIProps) {
