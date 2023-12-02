@@ -9,9 +9,6 @@ function Burger() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
-  console.log("loading " + loading);
-  console.log("session " + session);
-
   function logoutHandler() {
     if (checkboxRef.current) {
       checkboxRef.current.checked = false;

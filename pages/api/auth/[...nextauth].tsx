@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         const account = await accountCollection.findOne({
           account: credentials!.account,
         });
-        console.log(account);
+
         if (!account) {
           client.close();
           throw new Error("沒有找到帳號");

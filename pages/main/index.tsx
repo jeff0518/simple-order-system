@@ -1,16 +1,15 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
+import useAuthCheck from "@/hooks/useAuthCheck";
 import Main from "@/components/main/Main";
 
 import style from "./index.module.scss";
 
 function HomePage() {
-  const router = useRouter();
+  const authCheckComponent = useAuthCheck();
 
-  const { data: session, status } = useSession();
-
-  if (!session) {
-    router.replace("/");
+  if (authCheckComponent) {
+    return <p>Loading...</p>;
   }
 
   return (
