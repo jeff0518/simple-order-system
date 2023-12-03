@@ -9,30 +9,12 @@ export const Toast = Swal.mixin({
   position: "top-end",
   showConfirmButton: false,
   heightAuto: false,
-  width: 250,
-  timer: 3000,
+  width: 300,
+  timer: 2000,
 });
 
-export const successAlert = MySwal.fire({
-  icon: "success",
-  title: "登入成功",
-  text: "歡迎回來！",
-  toast: true,
-  position: "top-end",
+export const Alert = Swal.mixin({
   showConfirmButton: false,
-  heightAuto: false,
-  width: 250,
-  timer: 3000,
-});
-
-export const errorAlert = MySwal.fire({
-  icon: "error",
-  title: "登入失敗",
-  text: "請檢查您的帳號和密碼。",
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  heightAuto: false,
-  width: 250,
+  width: 1200,
   timer: 3000,
 });
