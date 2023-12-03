@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { FormEvent } from "@/utils/type";
 import { CreateUser } from "@/hooks/CreateUser";
+import { Toast } from "@/utils/getSweetalert";
 
 import InputUI from "../shared/InputUI";
 import ButtonUI from "../shared/ButtonUI";
@@ -33,7 +34,16 @@ function AuthForm() {
       });
 
       if (result && !result.error) {
+        Toast.fire({
+          icon: "success",
+          title: "成功登入!",
+        });
         router.replace("/main");
+      } else {
+        Toast.fire({
+          icon: "warning",
+          title: "帳號密碼錯誤!",
+        });
       }
     } else {
       try {
