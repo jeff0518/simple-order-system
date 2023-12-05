@@ -6,6 +6,8 @@ interface InputUIProps {
   inputText: string;
   inputStyle: string;
   inputPlaceholder: string;
+  inputMaxLength?: number;
+  inputPattern?: string;
   inputRef: React.RefObject<HTMLInputElement>;
 }
 
@@ -17,6 +19,8 @@ function InputUI(props: InputUIProps) {
     inputStyle,
     inputPlaceholder,
     inputRef,
+    inputMaxLength,
+    inputPattern,
   } = props;
   return (
     <div className={style[inputStyle]}>
@@ -26,6 +30,8 @@ function InputUI(props: InputUIProps) {
         id={inputId}
         placeholder={inputPlaceholder}
         ref={inputRef}
+        maxLength={inputMaxLength}
+        pattern={inputPattern}
         required
       />
     </div>

@@ -2,8 +2,45 @@
 @import "../../styles/mixin";
 
 .employee_container {
-  width: 100%;
+  width: 90%;
   height: calc(100vh - 5rem - 2.5rem);
   background-color: color.$gray-6;
-  @include center-both;
+
+  .addImage {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: color.$gray-1;
+    position: fixed;
+    bottom: 4rem;
+    right: 1.5rem;
+    z-index: 10;
+    @include center-both;
+
+    &__btn {
+      width: 4rem;
+      height: 4rem;
+      border: none;
+      background-color: color.$gray-1;
+      border-radius: 50%;
+      transition: all 0.2s ease-out;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+        background-color: color.$primary-color;
+      }
+    }
+  }
+
+  .employeeBox {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background-color: color.$brand-light-color;
+    overflow-y: scroll;
+  }
 }

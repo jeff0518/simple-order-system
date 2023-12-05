@@ -20,6 +20,10 @@ function AuthForm() {
 
     if (!accountInputRef.current || !passwordInputRef.current) {
       console.log("未補抓到accountInputRef或passwordInputRef");
+      Toast.fire({
+        icon: "warning",
+        title: "輸入欄位填寫不完全!",
+      });
       return;
     }
 
