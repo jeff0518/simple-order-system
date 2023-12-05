@@ -1,19 +1,19 @@
 import axios from "axios";
 
 export async function CreateEmployee(
+  numberId: string,
   name: string,
   jobTitle: string,
   employmentDate: string,
-  birthday: string,
   phone: string,
   address: string
 ) {
   try {
     const response = await axios.post("/api/employees/addNewEmployees", {
+      numberId,
       name,
       jobTitle,
       employmentDate,
-      birthday,
       phone,
       address,
     });

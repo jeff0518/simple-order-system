@@ -4,6 +4,7 @@
 .employee_container {
   width: 90%;
   height: calc(100vh - 5rem - 2.5rem);
+  position: relative;
   background-color: color.$gray-6;
 
   .addImage {
@@ -39,6 +40,7 @@
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 0.5rem;
     background-color: color.$brand-light-color;
     overflow-y: scroll;

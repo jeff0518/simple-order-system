@@ -17,6 +17,13 @@
     align-items: center;
     gap: 2rem;
     @include text-styles(1.25rem, 700, color.$gray-3);
+
+    .info_title {
+      width: 30%;
+    }
+    .info_name {
+      width: 50%;
+    }
   }
   .ctrl {
     width: 30%;

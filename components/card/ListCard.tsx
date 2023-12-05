@@ -1,14 +1,15 @@
+import { useRouter } from "next/router";
+
 import ButtonUI from "../shared/ButtonUI";
+import { EmployeeProps } from "@/utils/type";
 
 import style from "./ListCard.module.scss";
 
-interface employeeProps {
-  jobTitle: string;
-  name: string;
-}
-
-function ListCard({ jobTitle, name }: employeeProps) {
-  const navigateHandler = () => {};
+function ListCard({ jobTitle, name, numberId }: EmployeeProps) {
+  const router = useRouter();
+  const navigateHandler = () => {
+    router.replace(`/employee/${numberId}`);
+  };
   return (
     <div className={style.listCard_container}>
       <div className={style.info}>
