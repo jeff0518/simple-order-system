@@ -9,10 +9,11 @@ import ButtonUI from "@/components/shared/ButtonUI";
 import style from "./AddEmployeeModal.module.scss";
 
 interface Props {
+  defaultValue: string;
   onClick: () => void;
 }
 
-function AddEmployeeModal({ onClick }: Props) {
+function AddEmployeeModal({ onClick, defaultValue }: Props) {
   const numberIdInputRef = useRef<HTMLInputElement>(null!);
   const nameInputRef = useRef<HTMLInputElement>(null!);
   const jobTitleInputRef = useRef<HTMLInputElement>(null!);
@@ -78,15 +79,16 @@ function AddEmployeeModal({ onClick }: Props) {
               inputId="numberId"
               inputPlaceholder="請輸入員工編號"
               inputRef={numberIdInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="員工編號:"
-              inputType="number"
+              inputType="text"
+              inputValue={defaultValue}
             />
             <InputUI
               inputId="name"
               inputPlaceholder="請輸入員工姓名"
               inputRef={nameInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="姓名:"
               inputType="text"
             />
@@ -94,7 +96,7 @@ function AddEmployeeModal({ onClick }: Props) {
               inputId="jobTitle"
               inputPlaceholder="請輸入員工職稱"
               inputRef={jobTitleInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="職稱:"
               inputType="text"
             />
@@ -102,7 +104,7 @@ function AddEmployeeModal({ onClick }: Props) {
               inputId="employmentDate"
               inputPlaceholder="請輸入員工入職日期"
               inputRef={employmentDateInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="入職日期:"
               inputType="date"
             />
@@ -111,7 +113,7 @@ function AddEmployeeModal({ onClick }: Props) {
               inputId="phone"
               inputPlaceholder="請輸入員工手機:09XXXXXXXX"
               inputRef={phoneInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="手機:"
               inputType="tel"
               inputMaxLength={10}
@@ -121,7 +123,7 @@ function AddEmployeeModal({ onClick }: Props) {
               inputId="address"
               inputPlaceholder="請輸入員工居住地址"
               inputRef={addressInputRef}
-              inputStyle="input_control"
+              inputStyle="input_modal"
               inputText="居住地址:"
               inputType="text"
             />
