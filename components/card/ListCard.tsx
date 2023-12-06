@@ -7,7 +7,13 @@ import { EmployeeProps } from "@/utils/type";
 
 import style from "./ListCard.module.scss";
 
-function ListCard({ jobTitle, name, numberId, setDataUpdate }: EmployeeProps) {
+function ListCard({
+  jobTitle,
+  name,
+  numberId,
+  setDataUpdate,
+  dataUpdate,
+}: EmployeeProps) {
   const [isEmployeeInfo, setIsEmployeeInfo] = useState<boolean>(false);
   const [isChangeEmployeeInfo, setIsChangeEmployeeInfo] =
     useState<boolean>(false);
@@ -17,7 +23,7 @@ function ListCard({ jobTitle, name, numberId, setDataUpdate }: EmployeeProps) {
     setIsEmployeeInfo(false);
     setIsChangeEmployeeInfo(false);
     if (setDataUpdate) {
-      setDataUpdate((prev: boolean) => !prev);
+      dataUpdate ? setDataUpdate(false) : setDataUpdate(true);
     }
   };
 

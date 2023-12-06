@@ -8,6 +8,7 @@ export interface EmployeeProps {
   jobTitle: string,
   employmentDate?: string,
   phone?: string,
-  address?: string
-  setDataUpdate?: (dataUpdate:boolean) => void
+  address?: string,
+  dataUpdate?: boolean,
+  setDataUpdate?: (prev: boolean) => void,
 }

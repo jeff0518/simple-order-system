@@ -74,6 +74,7 @@ function Employee() {
                 jobTitle={item.jobTitle}
                 name={item.name}
                 setDataUpdate={setDataUpdate}
+                dataUpdate={dataUpdate}
               />
             );
           })}
