@@ -2,7 +2,7 @@ import style from "./InfoCard.module.scss";
 
 interface InfoCardProps {
   fistText: string;
-  lastText: string | number;
+  lastText: string | number | undefined;
 }
 function InfoCard({ fistText, lastText }: InfoCardProps) {
   return (

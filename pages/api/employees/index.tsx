@@ -8,12 +8,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log("有進來api");
   if (req.method !== "GET") {
     console.log("req.method錯誤");
     return;
   }
-  console.log("通過api檢查");
 
   const client = await connectToDatabase();
   const db = client.db();

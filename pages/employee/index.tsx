@@ -2,9 +2,10 @@ import { IoMdAdd } from "react-icons/io";
 import { EmployeeProps } from "@/utils/type";
 import { useState, useEffect } from "react";
 
-import { getEmployeeData } from "@/services/getEmployeeData";
+import { getAllEmployeeData } from "@/services/EmployeeData";
+import useAuthCheck from "@/hooks/useAuthCheck";
 import ListCard from "@/components/card/ListCard";
-import AddEmployeeModal from "@/components/modal/AddEmployeeModal";
+import AddEmployeeModal from "@/components/modal/employee/AddEmployeeModal";
 
 import style from "./index.module.scss";
 
@@ -12,10 +13,10 @@ function Employee() {
   const [isAddEmployee, setIsAddEmployee] = useState(false);
   const [employeeData, setEmployeeData] = useState<EmployeeProps[]>([]);
   const [defaultValue, setDefaultValue] = useState<string>("00001");
-
+  useAuthCheck();
   const fetchData = async () => {
     try {
-      const data = await getEmployeeData();
+      const data = await getAllEmployeeData();
       setEmployeeData(data.data);
     } catch (error) {
       console.log(error);
