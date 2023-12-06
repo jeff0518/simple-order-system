@@ -1,5 +1,5 @@
-@use "../../../styles/colors" as color;
-@import "../../../styles/mixin";
+@use "/styles/colors" as color;
+@import "/styles/mixin";
 
 .backdrop {
   position: fixed;
@@ -11,7 +11,7 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
-.info_container {
+.changeInformation_container {
   width: 70%;
   height: 80%;
   padding: 1rem;
@@ -39,8 +39,9 @@
   .info_ctrl {
     width: 100%;
     height: 30%;
+    padding-left: 70%;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 0.5rem;
   }
 }

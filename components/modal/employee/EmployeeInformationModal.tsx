@@ -9,11 +9,21 @@ import style from "./EmployeeInformationModal.module.scss";
 
 interface InfoProps {
   numberId: string;
+  employeeIdData: EmployeeProps | undefined;
+  setEmployeeIdData: (employeeIdData: EmployeeProps) => void;
   onClick: () => void;
+  setIsEmployeeInfo: (isEmployeeInfo: boolean) => void;
+  setIsChangeEmployeeInfo: (isChangeEmployeeInfo: boolean) => void;
 }
 
-function EmployeeInformationModal({ onClick, numberId }: InfoProps) {
-  const [employeeIdData, setEmployeeIdData] = useState<EmployeeProps>();
+function EmployeeInformationModal({
+  onClick,
+  numberId,
+  employeeIdData,
+  setEmployeeIdData,
+  setIsEmployeeInfo,
+  setIsChangeEmployeeInfo,
+}: InfoProps) {
   const fetchData = async () => {
     try {
       const data = await getNumberIdEmployeeData(numberId);
@@ -51,7 +61,14 @@ function EmployeeInformationModal({ onClick, numberId }: InfoProps) {
           )}
         </div>
         <div className={style.info_ctrl}>
-          <ButtonUI btnStyle="btn__pill" text="修改" onClick={() => {}} />
+          <ButtonUI
+            btnStyle="btn__pill"
+            text="修改"
+            onClick={() => {
+              setIsEmployeeInfo(false);
+              setIsChangeEmployeeInfo(true);
+            }}
+          />
           <ButtonUI btnStyle="btn__pill" text="刪除" onClick={() => {}} />
         </div>
       </div>

@@ -10,6 +10,7 @@ import AddEmployeeModal from "@/components/modal/employee/AddEmployeeModal";
 import style from "./index.module.scss";
 
 function Employee() {
+  const [dataUpdate, setDataUpdate] = useState(false);
   const [isAddEmployee, setIsAddEmployee] = useState(false);
   const [employeeData, setEmployeeData] = useState<EmployeeProps[]>([]);
   const [defaultValue, setDefaultValue] = useState<string>("00001");
@@ -25,11 +26,12 @@ function Employee() {
 
   const closeModalHandler = () => {
     setIsAddEmployee(false);
+    setDataUpdate((prev) => !prev);
   };
 
   useEffect(() => {
     fetchData();
-  }, [isAddEmployee]);
+  }, [dataUpdate]);
 
   useEffect(() => {
     if (employeeData.length > 0) {
@@ -71,6 +73,7 @@ function Employee() {
                 numberId={item.numberId}
                 jobTitle={item.jobTitle}
                 name={item.name}
+                setDataUpdate={setDataUpdate}
               />
             );
           })}

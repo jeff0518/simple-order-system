@@ -1,18 +1,24 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 import EmployeeInformationModal from "../modal/employee/EmployeeInformationModal";
+import ChangeInformation from "../modal/employee/ChangeInformationModal";
 import ButtonUI from "../shared/ButtonUI";
 import { EmployeeProps } from "@/utils/type";
 
 import style from "./ListCard.module.scss";
 
-function ListCard({ jobTitle, name, numberId }: EmployeeProps) {
-  const [isEmployeeInfo, setIsEmployeeInfo] = useState(false);
+function ListCard({ jobTitle, name, numberId, setDataUpdate }: EmployeeProps) {
+  const [isEmployeeInfo, setIsEmployeeInfo] = useState<boolean>(false);
+  const [isChangeEmployeeInfo, setIsChangeEmployeeInfo] =
+    useState<boolean>(false);
+  const [employeeIdData, setEmployeeIdData] = useState<EmployeeProps>();
 
-  const router = useRouter();
   const closeModalHandler = () => {
     setIsEmployeeInfo(false);
+    setIsChangeEmployeeInfo(false);
+    if (setDataUpdate) {
+      setDataUpdate((prev: boolean) => !prev);
+    }
   };
 
   return (
@@ -20,7 +26,19 @@ function ListCard({ jobTitle, name, numberId }: EmployeeProps) {
       {isEmployeeInfo && (
         <EmployeeInformationModal
           numberId={numberId}
+          employeeIdData={employeeIdData}
+          setEmployeeIdData={setEmployeeIdData}
+          setIsEmployeeInfo={setIsEmployeeInfo}
+          setIsChangeEmployeeInfo={setIsChangeEmployeeInfo}
           onClick={closeModalHandler}
+        />
+      )}
+      {isChangeEmployeeInfo && (
+        <ChangeInformation
+          employeeIdData={employeeIdData}
+          setEmployeeIdData={setEmployeeIdData}
+          onClick={closeModalHandler}
+          numberId={numberId}
         />
       )}
 
