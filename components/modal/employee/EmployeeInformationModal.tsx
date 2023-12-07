@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   getNumberIdEmployeeData,
   deleteEmployeeData,
-} from "@/services/EmployeeData";
+} from "@/services/EmployeeDataAPI";
 
 import { EmployeeProps } from "@/utils/type";
 import { Toast } from "@/utils/getSweetalert";
@@ -33,6 +33,10 @@ function EmployeeInformationModal({
       const data = await getNumberIdEmployeeData(numberId);
       setEmployeeIdData(data.data);
     } catch (error) {
+      Toast.fire({
+        icon: "warning",
+        title: "無法抓取資料！",
+      });
       console.log(error);
     }
   };
@@ -40,18 +44,24 @@ function EmployeeInformationModal({
   const deleteDataHandler = async () => {
     try {
       const data = await deleteEmployeeData(numberId);
-      Toast.fire({
-        icon: "success",
-        title: "刪除員工資料成功!",
-      });
-      console.log(data);
+      if (data) {
+        Toast.fire({
+          icon: "success",
+          title: "刪除員工資料成功!",
+        });
+      } else {
+        Toast.fire({
+          icon: "warning",
+          title: "刪除失敗！",
+        });
+      }
+
       onClick();
     } catch (error) {
       Toast.fire({
         icon: "warning",
         title: "無法刪除！",
       });
-      console.log(error);
     }
   };
 

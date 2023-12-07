@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { FormEvent } from "@/utils/type";
-import { CreateEmployee } from "@/hooks/CreateEmployee";
+import { createEmployee } from "@/services/EmployeeDataAPI";
 import { Toast } from "@/utils/getSweetalert";
 
 import InputUI from "@/components/shared/InputUI";
@@ -47,14 +47,14 @@ function AddEmployeeModal({ onClick, defaultValue }: Props) {
     const enterAddress = addressInputRef.current.value;
 
     try {
-      const result = await CreateEmployee(
+      const result = await createEmployee({
         enterNumberId,
         enterName,
         enterJobTitle,
         enterEmployment,
         enterPhone,
-        enterAddress
-      );
+        enterAddress,
+      });
       console.log(result);
       Toast.fire({
         icon: "success",

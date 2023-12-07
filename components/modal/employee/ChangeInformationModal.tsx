@@ -1,9 +1,8 @@
-import axios from "axios";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { FormEvent } from "@/utils/type";
 import { Toast } from "@/utils/getSweetalert";
 import { EmployeeProps } from "@/utils/type";
-// import { patchNumberIdEmployeeData } from "@/services/EmployeeData";
+import { patchEmployeeData } from "@/services/EmployeeDataAPI";
 
 import ChangeInfoCard from "@/components/card/ChangeInfoCard";
 import ButtonUI from "@/components/shared/ButtonUI";
@@ -53,7 +52,7 @@ function ChangeInformation({
     const enterAddress = addressInputRef.current.value;
 
     try {
-      const result = await axios.patch(`/api/employees/${numberId}`, {
+      const result = await patchEmployeeData({
         numberId,
         enterName,
         enterJobTitle,
@@ -61,11 +60,18 @@ function ChangeInformation({
         enterPhone,
         enterAddress,
       });
-      console.log(result);
-      Toast.fire({
-        icon: "success",
-        title: "修改員工資料成功!",
-      });
+      if (result) {
+        Toast.fire({
+          icon: "success",
+          title: "修改員工資料成功!",
+        });
+      } else {
+        Toast.fire({
+          icon: "warning",
+          title: "修改員工資料失敗!",
+        });
+      }
+
       onClick();
     } catch (error) {
       Toast.fire({

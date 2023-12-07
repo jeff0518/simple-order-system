@@ -9,18 +9,25 @@ import { connectToDatabase } from "@/services/db";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const data = req.body;
-  const { numberId, name, jobTitle, employmentDate, phone, address } = data;
+  const {
+    enterNumberId,
+    enterName,
+    enterJobTitle,
+    enterEmployment,
+    enterPhone,
+    enterAddress,
+  } = data;
 
   const client = await connectToDatabase();
   const db = client.db();
 
   const result = await db.collection("employees").insertOne({
-    numberId: numberId,
-    name: name,
-    jobTitle: jobTitle,
-    employmentDate: employmentDate,
-    phone: phone,
-    address: address,
+    numberId: enterNumberId,
+    name: enterName,
+    jobTitle: enterJobTitle,
+    employmentDate: enterEmployment,
+    phone: enterPhone,
+    address: enterAddress,
   });
 
   res.status(201).json({ message: "建立員工資料成功" });

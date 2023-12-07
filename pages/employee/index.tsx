@@ -2,7 +2,7 @@ import { IoMdAdd } from "react-icons/io";
 import { EmployeeProps } from "@/utils/type";
 import { useState, useEffect } from "react";
 
-import { getAllEmployeeData } from "@/services/EmployeeData";
+import { getAllEmployeeData } from "@/services/EmployeeDataAPI";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import ListCard from "@/components/card/ListCard";
 import AddEmployeeModal from "@/components/modal/employee/AddEmployeeModal";
