@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { FormEvent } from "@/utils/type";
 import { Toast } from "@/utils/getSweetalert";
 import { EmployeeProps } from "@/utils/type";
-import { patchNumberIdEmployeeData } from "@/services/EmployeeData";
+// import { patchNumberIdEmployeeData } from "@/services/EmployeeData";
 
 import ChangeInfoCard from "@/components/card/ChangeInfoCard";
 import ButtonUI from "@/components/shared/ButtonUI";
@@ -68,6 +68,10 @@ function ChangeInformation({
       });
       onClick();
     } catch (error) {
+      Toast.fire({
+        icon: "warning",
+        title: "修改員工資料失敗!",
+      });
       console.log(error);
     }
   };
@@ -120,7 +124,7 @@ function ChangeInformation({
           )}
         </div>
         <div className={style.info_ctrl}>
-          <ButtonUI btnStyle="btn__pill" text="完成" />
+          <ButtonUI btnStyle="btn__pill" text="儲存" />
         </div>
       </form>
     </>

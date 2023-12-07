@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import { getNumberIdEmployeeData } from "@/services/EmployeeData";
+import {
+  getNumberIdEmployeeData,
+  deleteEmployeeData,
+} from "@/services/EmployeeData";
 
 import { EmployeeProps } from "@/utils/type";
+import { Toast } from "@/utils/getSweetalert";
 import InfoCard from "@/components/card/InfoCard";
 import ButtonUI from "@/components/shared/ButtonUI";
 
@@ -24,7 +28,7 @@ function EmployeeInformationModal({
   setIsEmployeeInfo,
   setIsChangeEmployeeInfo,
 }: InfoProps) {
-  const fetchData = async () => {
+  const fetchDataHandler = async () => {
     try {
       const data = await getNumberIdEmployeeData(numberId);
       setEmployeeIdData(data.data);
@@ -33,10 +37,26 @@ function EmployeeInformationModal({
     }
   };
 
-  console.log(employeeIdData);
+  const deleteDataHandler = async () => {
+    try {
+      const data = await deleteEmployeeData(numberId);
+      Toast.fire({
+        icon: "success",
+        title: "刪除員工資料成功!",
+      });
+      console.log(data);
+      onClick();
+    } catch (error) {
+      Toast.fire({
+        icon: "warning",
+        title: "無法刪除！",
+      });
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    fetchData();
+    fetchDataHandler();
   }, []);
   return (
     <>
@@ -69,7 +89,11 @@ function EmployeeInformationModal({
               setIsChangeEmployeeInfo(true);
             }}
           />
-          <ButtonUI btnStyle="btn__pill" text="刪除" onClick={() => {}} />
+          <ButtonUI
+            btnStyle="btn__pill"
+            text="刪除"
+            onClick={deleteDataHandler}
+          />
         </div>
       </div>
     </>

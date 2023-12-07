@@ -65,7 +65,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "DELETE") {
+    const data = req.query;
+    const { employeesId } = data;
+    if (employeesId === undefined) return;
     try {
+      await db.collection("employees").deleteOne({ numberId: employeesId[0] });
+
+      res.status(200).json({ message: "員工資料已成功刪除" });
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
     }

@@ -18,9 +18,18 @@ export const getNumberIdEmployeeData = async (numberId: string) => {
   }
 };
 
-export const patchNumberIdEmployeeData = async (numberId: string) => {
+// export const patchNumberIdEmployeeData = async (numberId: string) => {
+//   try {
+//     const { data } = await axios.patch(`/api/employees/${numberId}`);
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const deleteEmployeeData = async (numberId: string) => {
   try {
-    const { data } = await axios.patch(`/api/employees/${numberId}`);
+    const { data } = await axios.delete(`/api/employees/${numberId}`);
     return data;
   } catch (error) {
     console.log(error);
