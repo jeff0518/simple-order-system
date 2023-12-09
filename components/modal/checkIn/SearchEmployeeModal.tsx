@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getNumberIdEmployeeData } from "@/services/EmployeeDataAPI";
+import { createCheckInFile } from "@/services/CheckInAPI";
 import { Toast } from "@/utils/getSweetalert";
 import SearchForm from "@/components/search/SearchForm";
 import CheckInModal from "./CheckInModal";
@@ -26,6 +27,8 @@ function SearchEmployeeModal({
     try {
       if (!employeeId) return;
       const { data } = await getNumberIdEmployeeData(employeeId);
+      const result = await createCheckInFile(data.numberId);
+      console.log(result);
       setCheckInData({
         name: data.name,
         numberId: data.numberId,
