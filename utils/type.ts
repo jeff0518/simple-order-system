@@ -12,3 +12,10 @@ export interface EmployeeProps {
   dataUpdate?: boolean,
   setDataUpdate?: (prev: boolean) => void,
 }
+
+export interface CheckInProps {
+  checkInData: {
+    name: string;
+    numberId: string;
+  };
+}

@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { getNumberIdEmployeeData } from "@/services/EmployeeDataAPI";
+import { Toast } from "@/utils/getSweetalert";
 import SearchForm from "@/components/search/SearchForm";
 import CheckInModal from "./CheckInModal";
 
@@ -8,18 +11,47 @@ interface SearchEmployeeProps {
   setIsShowSearch: (isShowSearch: boolean) => void;
   setIsShowCheckIn: (isShowCheckIn: boolean) => void;
 }
+
+const defaultValue = { name: "", numberId: "" };
+
 function SearchEmployeeModal({
   isShowSearch,
   setIsShowSearch,
   setIsShowCheckIn,
 }: SearchEmployeeProps) {
-  const checkInHandler = () => {
+  const [employeeId, setEmployeeId] = useState<string | null>("");
+  const [checkInData, setCheckInData] = useState(defaultValue);
+  const checkInHandler = async () => {
     // 抓api，成功才執行下面code
-    setIsShowSearch(false);
+    try {
+      if (!employeeId) return;
+      const { data } = await getNumberIdEmployeeData(employeeId);
+      setCheckInData({
+        name: data.name,
+        numberId: data.numberId,
+      });
+      Toast.fire({
+        icon: "success",
+        title: "登入成功!",
+      });
+      setIsShowSearch(false);
+    } catch (error) {
+      Toast.fire({
+        icon: "warning",
+        title: "員工編號輸入錯誤!",
+      });
+      console.log(error);
+    }
   };
   const closeModalHandler = () => {
     setIsShowCheckIn(false);
+    setEmployeeId(null);
+    setCheckInData(defaultValue);
   };
+
+  useEffect(() => {
+    checkInHandler();
+  }, [employeeId]);
   return (
     <>
       <div className={style.backdrop} onClick={closeModalHandler} />
@@ -29,10 +61,11 @@ function SearchEmployeeModal({
             inputId="searchEmployee"
             inputPlaceholder="請輸入員工編號"
             inputText="員工編號: "
+            setEmployeeId={setEmployeeId}
             onClick={checkInHandler}
           />
         ) : (
-          <CheckInModal />
+          <CheckInModal checkInData={checkInData} />
         )}
       </div>
     </>

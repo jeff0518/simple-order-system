@@ -1,10 +1,13 @@
+import { CheckInProps } from "@/utils/type";
+
 import ButtonUI from "@/components/shared/ButtonUI";
 import style from "./CheckInModal.module.scss";
-function CheckInModal() {
+
+function CheckInModal({ checkInData }: CheckInProps) {
   return (
     <>
       <div className={style.checkIn_container}>
-        <div className={style.title}>XXX 辛苦了！</div>
+        <div className={style.title}>{checkInData.name} 你好！</div>
         <div className={style.buttonBox}>
           <ButtonUI
             btnStyle="btn__checkIn__pill"

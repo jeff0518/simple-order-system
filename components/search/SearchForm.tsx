@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { FormEvent } from "@/utils/type";
 
 import InputUI from "../shared/InputUI";
 import ButtonUI from "../shared/ButtonUI";
@@ -9,14 +10,22 @@ interface SearchFormProps {
   inputId: string;
   inputPlaceholder: string;
   inputText: string;
+  setEmployeeId: (employeeId: string) => void;
   onClick: () => void;
 }
 
 function SearchForm(props: SearchFormProps) {
-  const { inputText, inputId, inputPlaceholder, onClick } = props;
+  const { inputText, inputId, inputPlaceholder, setEmployeeId, onClick } =
+    props;
   const searchInputRef = useRef<HTMLInputElement>(null!);
+
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+    const enterSearchInput = searchInputRef.current.value;
+    setEmployeeId(enterSearchInput);
+  };
   return (
-    <div className={style.searchForm_container}>
+    <form className={style.searchForm_container} onSubmit={submitHandler}>
       <div className={style.searchForm_input}>
         <InputUI
           inputId={inputId}
@@ -28,9 +37,9 @@ function SearchForm(props: SearchFormProps) {
         />
       </div>
       <div className={style.searchForm_bnt}>
-        <ButtonUI text="送出" btnStyle="btn__pill" onClick={onClick} />
+        <ButtonUI text="送出" btnStyle="btn__pill" />
       </div>
-    </div>
+    </form>
   );
 }
 
