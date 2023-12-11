@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import EmployeeInformationModal from "../modal/employee/EmployeeInformationModal";
+import AttendanceModal from "../modal/checkIn/AttendanceModal";
 import ChangeInformation from "../modal/employee/ChangeInformationModal";
 import ButtonUI from "../shared/ButtonUI";
 import { EmployeeProps } from "@/utils/type";
@@ -15,6 +16,7 @@ function ListCard({
   dataUpdate,
 }: EmployeeProps) {
   const [isEmployeeInfo, setIsEmployeeInfo] = useState<boolean>(false);
+  const [isAttendance, setIsAttendance] = useState<boolean>(false);
   const [isChangeEmployeeInfo, setIsChangeEmployeeInfo] =
     useState<boolean>(false);
   const [employeeIdData, setEmployeeIdData] = useState<EmployeeProps>();
@@ -22,6 +24,7 @@ function ListCard({
   const closeModalHandler = () => {
     setIsEmployeeInfo(false);
     setIsChangeEmployeeInfo(false);
+    setIsAttendance(false);
     if (setDataUpdate) {
       dataUpdate ? setDataUpdate(false) : setDataUpdate(true);
     }
@@ -47,7 +50,14 @@ function ListCard({
           numberId={numberId}
         />
       )}
-
+      {isAttendance && (
+        <AttendanceModal
+          name={name}
+          numberId={numberId}
+          jobTitle={jobTitle}
+          onClick={closeModalHandler}
+        />
+      )}
       <div className={style.listCard_container}>
         <div className={style.info}>
           <div className={style.info_title}>職稱: {jobTitle}</div>
@@ -62,7 +72,13 @@ function ListCard({
               setIsEmployeeInfo(true);
             }}
           />
-          <ButtonUI text="出勤" btnStyle="btn__pill" onClick={() => {}} />
+          <ButtonUI
+            text="出勤"
+            btnStyle="btn__pill"
+            onClick={() => {
+              setIsAttendance(true);
+            }}
+          />
         </div>
       </div>
     </>

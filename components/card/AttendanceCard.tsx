@@ -1,12 +1,23 @@
 import style from "./AttendanceCard.module.scss";
 
-function AttendanceCard() {
+interface AttendanceCardProps {
+  date: string;
+  clockIn: string;
+  clockOut: string;
+}
+
+function AttendanceCard({ date, clockIn, clockOut }: AttendanceCardProps) {
   return (
     <div className={style.attendanceCard_container}>
-      <div className={style.info}>2023.11.17</div>
-      <div className={style.info}>上班：08:12</div>
-      <div className={style.info}>下班：20:12</div>
-      <div className={style.info}>總時數：12小時</div>
+      <div className={style.info}>{date}</div>
+      <div className={style.info}>
+        <span>簽到</span>
+        {clockIn}
+      </div>
+      <div className={style.info}>
+        <span>簽退</span>
+        {clockOut}
+      </div>
     </div>
   );
 }
