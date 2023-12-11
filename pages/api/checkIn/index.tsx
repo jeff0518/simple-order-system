@@ -26,20 +26,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .collection("checkIn")
     .findOne({ numberId: numberId });
 
-  console.log("existingFile 是：  " + existingFile);
   if (!existingFile) {
     const result = await db.collection("checkIn").insertOne({
       numberId: numberId,
-      clockIn: {
-        date: new Date().toLocaleString(),
-      },
-      clockOut: {
-        date: "",
-      },
+      clockRecords: [],
     });
     console.log(result);
+    res.status(201).json({ message: "成功建立" });
+  } else {
+    res.status(201).json({ message: "已經有建立" });
   }
-  res.status(201).json({ message: "完成" });
+
   client.close();
 }
 

@@ -17,20 +17,37 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const client = await connectToDatabase();
   const db = client.db();
+  const today = new Date().toLocaleDateString("zh-Tw");
 
-  const existingUser = await db
+  const existingDate = await db
     .collection("checkIn")
-    .findOne({ numberId: numberId });
-  if (existingUser) {
-    // 打上班卡
+    .findOne({ clockRecords: { $elemMatch: { date: today } } });
+
+  if (existingDate) {
+    await db.collection("checkIn").updateOne(
+      { numberId: numberId, "clockRecords.date": today },
+      {
+        $set: {
+          "clockRecords.$.clockIn": new Date().toLocaleTimeString(),
+        },
+      }
+    );
   } else {
-    const result = await db.collection("checkIn").insertOne({
-      // 新增資料夾並打上班卡
-      numberId: numberId,
-    });
+    await db.collection("checkIn").updateOne(
+      { numberId: numberId },
+      {
+        $push: {
+          clockRecords: {
+            date: today,
+            clockIn: new Date().toLocaleTimeString(),
+            clockOut: "",
+          },
+        },
+      }
+    );
   }
 
-  res.status(201).json({ message: "" });
+  res.status(201).json({ message: "上班打卡成功" });
   client.close();
 }
 

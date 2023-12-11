@@ -11,6 +11,44 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     return;
   }
+
+  const data = req.body;
+  const { numberId } = data;
+
+  const client = await connectToDatabase();
+  const db = client.db();
+  const today = new Date().toLocaleDateString("zh-Tw");
+
+  const existingDate = await db
+    .collection("checkIn")
+    .findOne({ clockRecords: { $elemMatch: { date: today } } });
+
+  if (existingDate) {
+    await db.collection("checkIn").updateOne(
+      { numberId: numberId, "clockRecords.date": today },
+      {
+        $set: {
+          "clockRecords.$.clockOut": new Date().toLocaleTimeString(),
+        },
+      }
+    );
+  } else {
+    await db.collection("checkIn").updateOne(
+      { numberId: numberId },
+      {
+        $push: {
+          clockRecords: {
+            date: today,
+            clockIn: "",
+            clockOut: new Date().toLocaleTimeString(),
+          },
+        },
+      }
+    );
+  }
+
+  res.status(201).json({ message: "下班打卡成功" });
+  client.close();
 }
 
 export default handler;
