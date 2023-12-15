@@ -10,19 +10,18 @@ interface SearchFormProps {
   inputId: string;
   inputPlaceholder: string;
   inputText: string;
-  setEmployeeId: (employeeId: string) => void;
+  setState: (value: string) => void;
   onClick: () => void;
 }
 
 function SearchForm(props: SearchFormProps) {
-  const { inputText, inputId, inputPlaceholder, setEmployeeId, onClick } =
-    props;
+  const { inputText, inputId, inputPlaceholder, setState, onClick } = props;
   const searchInputRef = useRef<HTMLInputElement>(null!);
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
     const enterSearchInput = searchInputRef.current.value;
-    setEmployeeId(enterSearchInput);
+    setState(enterSearchInput);
   };
   return (
     <form className={style.searchForm_container} onSubmit={submitHandler}>

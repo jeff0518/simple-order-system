@@ -64,7 +64,7 @@ function SearchEmployeeModal({
             inputId="searchEmployee"
             inputPlaceholder="請輸入員工編號"
             inputText="員工編號: "
-            setEmployeeId={setEmployeeId}
+            setState={setEmployeeId}
             onClick={checkInHandler}
           />
         ) : (

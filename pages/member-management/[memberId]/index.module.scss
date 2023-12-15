@@ -66,3 +66,10 @@
     }
   }
 }
+
+.text {
+  width: 100%;
+  height: 100%;
+  @include text-styles(1.5rem, 500, color.$gray-8);
+  @include center-both;
+}

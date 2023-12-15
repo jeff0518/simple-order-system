@@ -2,7 +2,7 @@ import style from "./SpendingRecordsCard.module.scss";
 
 interface SpendingRecordsCardProps {
   time: string;
-  spend: number;
+  spend: string;
 }
 
 function SpendingRecordsCard({ time, spend }: SpendingRecordsCardProps) {
