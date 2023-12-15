@@ -21,8 +21,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     await db.collection("member").insertOne({
       phoneNumber: phoneNumber,
       name: "",
-      count: "",
-      point: "",
+      count: 0,
+      point: 0,
       spendingRecords: [],
     });
     res.status(201).json({ message: "成功建立會員資料" });

@@ -7,7 +7,7 @@
   gap: 2rem;
 
   .changeInfo_fist {
-    width: 100%;
+    width: 30%;
     height: 2rem;
     @include center-both;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -18,7 +18,7 @@
   }
 
   .changeInfo_last {
-    width: 100%;
+    width: 70%;
     height: 2rem;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

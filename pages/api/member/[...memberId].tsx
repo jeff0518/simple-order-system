@@ -27,5 +27,29 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
+
+  if (req.method === "PATCH") {
+    const data = req.body;
+    const { newName, phoneNumber } = data;
+
+    try {
+      const result = await db.collection("member").updateOne(
+        { phoneNumber: phoneNumber },
+        {
+          $set: {
+            name: newName,
+          },
+        }
+      );
+
+      if (result.modifiedCount === 0) {
+        return res.status(404).json({ error: "找不到此員工" });
+      }
+
+      res.status(200).json({ message: "員工資料已成功更新" });
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 }
 export default handler;

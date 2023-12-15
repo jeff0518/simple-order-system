@@ -5,23 +5,11 @@ import InfoCard from "@/components/card/InfoCard";
 import ButtonUI from "@/components/shared/ButtonUI";
 import SpendingRecordsCard from "@/components/card/SpendingRecordsCard";
 import AddNewSpendingModal from "@/components/modal/member/AddNewSpendingModal";
+import FixMemberInfo from "@/components/modal/member/FixMemberInfo";
 import { getMemberData } from "@/services/MemberAPI";
 import useAuthCheck from "@/hooks/useAuthCheck";
 
 import style from "./index.module.scss";
-
-interface MemberData {
-  phoneNumber: string;
-  name?: string;
-  count?: string;
-  point?: string;
-  spendingRecords?: [
-    {
-      newDate: string;
-      newPoint: string;
-    }
-  ];
-}
 
 const defaultValue = {
   phoneNumber: "",
@@ -34,6 +22,7 @@ const defaultValue = {
 function MemberInfo() {
   useAuthCheck();
   const [isShowNewSpending, setIsShowNewSpending] = useState(false);
+  const [isShowFixMember, setIsShowFixMember] = useState(false);
   const [memberData, setMemberData] = useState(defaultValue);
   const router = useRouter();
 
@@ -52,6 +41,7 @@ function MemberInfo() {
 
   const closeModalHandler = () => {
     setIsShowNewSpending(false);
+    setIsShowFixMember(false);
     fetchMemberData();
   };
 
@@ -72,6 +62,14 @@ function MemberInfo() {
           onClick={closeModalHandler}
         />
       )}
+
+      {isShowFixMember && (
+        <FixMemberInfo
+          name={name}
+          phoneNumber={phoneNumber}
+          onClick={closeModalHandler}
+        />
+      )}
       <div className={style.memberInfo_container}>
         <div className={style.container_info}>
           <div className={style.container_info_data}>
@@ -81,7 +79,13 @@ function MemberInfo() {
             <InfoCard fistText="會員點數" lastText={point ? point : 0} />
           </div>
           <div className={style.container_info_ctrlInterface}>
-            <ButtonUI btnStyle="btn__pill" text="修改" onClick={() => {}} />
+            <ButtonUI
+              btnStyle="btn__pill"
+              text="修改"
+              onClick={() => {
+                setIsShowFixMember(true);
+              }}
+            />
             <ButtonUI
               btnStyle="btn__pill"
               text="新增消費紀錄"

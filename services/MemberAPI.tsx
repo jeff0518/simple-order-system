@@ -3,6 +3,7 @@ import axios from "axios";
 interface MemberProps {
   phoneNumber: string;
   name?: string;
+  newName?: string;
   count?: string;
   point?: string;
   newDate?: string;
@@ -67,9 +68,14 @@ export async function createNewSpending({
 //   }
 // }
 
-// export async function patchMemberData({ phoneNumber }: MemberProps) {
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function patchMemberData({ phoneNumber, newName }: MemberProps) {
+  try {
+    const { data } = await axios.patch(`/api/member/${phoneNumber}`, {
+      newName,
+      phoneNumber,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
