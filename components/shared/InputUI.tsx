@@ -9,7 +9,7 @@ interface InputUIProps {
   inputMaxLength?: number;
   inputPattern?: string;
   inputValue?: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 function InputUI(props: InputUIProps) {
