@@ -1,13 +1,15 @@
 import Image from "next/image";
 import ButtonUI from "../shared/ButtonUI";
+import { MenuProps } from "@/utils/type";
 
 import style from "./MenuCard.module.scss";
 import beef from "../../assets/image/beef.jpg";
-function MenuCard() {
+function MenuCard({ imageUrl, name, place, selling }: MenuProps) {
+  const imgUrl = typeof imageUrl === "string" ? imageUrl : undefined;
   return (
     <div className={style.menuCard_container}>
       <Image
-        src={beef}
+        src={imgUrl ? imgUrl : beef}
         width={300}
         height={200}
         alt="圖片"
@@ -15,9 +17,9 @@ function MenuCard() {
         className={style.menuCard_container_img}
       />
       <div className={style.menuCard_container_info}>
-        <div className={style.title}>品名：牛肉</div>
-        <div className={style.origin}>產地：美國</div>
-        <div className={style.sellingPrice}>售價：200元</div>
+        <div className={style.title}>品名：{name}</div>
+        <div className={style.origin}>產地：{place}</div>
+        <div className={style.sellingPrice}>售價： {selling} 元</div>
         <div className={style.controlPanel}>
           <ButtonUI
             text="修改"

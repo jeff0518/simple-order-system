@@ -33,6 +33,15 @@ export async function createMenu({
   }
 }
 
+export async function getMenu() {
+  try {
+    const { data } = await axios.get("/api/menu");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function upload(formData: any) {
   console.log(formData);
   // try {
@@ -48,10 +57,3 @@ export async function upload(formData: any) {
   //   console.log(error);
   // }
 }
-
-// export async function createMenu() {
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

@@ -13,6 +13,13 @@ export interface EmployeeProps {
   setDataUpdate?: (prev: boolean) => void,
 }
 
+export interface MenuProps {
+  name: string;
+  place: string;
+  selling: string;
+  imageUrl: string | ArrayBuffer;
+}
+
 export interface CheckInProps {
   checkInData: {
     name: string;
