@@ -22,7 +22,8 @@
     justify-content: center;
     gap: 0.5rem;
     .image {
-      width: 50%;
+      width: 100%;
+      display: contents;
       border-radius: 30px;
 
       &_img {
@@ -34,13 +35,26 @@
     }
 
     .info {
-      width: 50%;
+      width: 70%;
       height: 10rem;
       display: flex;
       justify-content: flex-start;
       flex-direction: column;
       @include text-styles(1rem, 500, color.$gray-8);
       gap: 0.5rem;
+
+      &_input_control {
+        width: 100%;
+        display: flex;
+        margin-bottom: 0.5rem;
+
+        label {
+          width: 100%;
+          @include text-styles(1rem, 500, color.$gray-1);
+          display: flex;
+          gap: 0.25rem;
+        }
+      }
     }
   }
 
@@ -91,6 +105,7 @@
 
       .image {
         width: 50%;
+        @include center-both;
         border-radius: 30px;
 
         &_img {
@@ -100,6 +115,10 @@
           max-height: 18rem;
           border-radius: 30px;
         }
+      }
+
+      .info {
+        width: 50%;
       }
     }
     .controlPanel {

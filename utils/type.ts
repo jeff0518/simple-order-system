@@ -14,10 +14,12 @@ export interface EmployeeProps {
 }
 
 export interface MenuProps {
+  productId: string;
   name: string;
   place: string;
   selling: string;
   imageUrl: string | ArrayBuffer;
+  isActive: boolean
 }
 
 export interface CheckInProps {

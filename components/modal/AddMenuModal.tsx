@@ -1,9 +1,10 @@
-import { useRef, useState, FormEvent } from "react";
+import { useRef, useState, FormEvent, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { AiOutlineFolderAdd } from "react-icons/ai";
 
-import { upload, createMenu } from "@/services/MenuAPI";
+import { MenuContext } from "@/context/MenuContext";
+import { createMenu } from "@/services/MenuAPI";
 import { Toast } from "@/utils/getSweetalert";
 import InputUI from "../shared/InputUI";
 import ButtonUI from "../shared/ButtonUI";
@@ -12,20 +13,69 @@ import style from "./AddMenuModal.module.scss";
 
 function AddMenuModal() {
   const router = useRouter();
+  const { menuData, setMenuData } = useContext(MenuContext);
   const [imageFile, setImageFile] = useState<string | ArrayBuffer | null>();
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
+  const [productId, setProductId] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState("");
   const nameInputRef = useRef<HTMLInputElement>(null!);
   const placeInputRef = useRef<HTMLInputElement>(null!);
   const priceInputRef = useRef<HTMLInputElement>(null!);
 
+  const handleRadioChange = (event: any) => {
+    const { value } = event.target;
+    setSelectedValue(value);
+  };
+
+  const productIdHandler = () => {
+    if (menuData.length > 0) {
+      const filteredData = menuData.filter((item: any) => {
+        const itemSelectedValue = item.productId.split("_")[0];
+        return itemSelectedValue === selectedValue;
+      });
+
+      console.log(filteredData);
+      if (filteredData.length > 0) {
+        const maxNumber = Math.max(
+          ...filteredData.map((item: any) =>
+            parseInt(item.productId.split("_")[1], 10)
+          )
+        );
+        console.log(maxNumber);
+        const formattedNumber = String(maxNumber + 1).padStart(5, "0");
+        setProductId(selectedValue + "_" + formattedNumber);
+      } else {
+        setProductId(selectedValue + "_" + "00001");
+      }
+      // let index = menuData.length - 1;
+      // let lastProductId = menuData[index].productId.split("_");
+      // if (lastProductId[0] === selectedValue) {
+      //   let changeNumber = Number(lastProductId[1]) + 1;
+      //   let formattedNumber = String(changeNumber).padStart(5, "0");
+      //   setProductId(selectedValue + "_" + formattedNumber);
+      // } else {
+      //   setProductId(selectedValue + "_" + "00001");
+      // }
+    } else {
+      setProductId(selectedValue + "_" + "00001");
+    }
+  };
+
   const addNewMenuHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!selectedValue) {
+      Toast.fire({
+        icon: "warning",
+        title: "沒有點選產品總類！",
+      });
+      return;
+    }
     if (!imageFile) {
       Toast.fire({
         icon: "warning",
-        title: "上傳圖片失敗！",
+        title: "上傳圖片失敗或沒有選擇圖片！",
       });
       return;
     }
@@ -37,12 +87,12 @@ function AddMenuModal() {
       const image = imageFile;
 
       const result = await createMenu({
+        productId,
         productName,
         placeOfOrigin,
         sellingPrice,
         image,
       });
-      console.log(result);
       Toast.fire({
         icon: "success",
         title: "建立新商品成功!",
@@ -56,6 +106,11 @@ function AddMenuModal() {
       });
     }
   };
+
+  useEffect(() => {
+    productIdHandler();
+  }, [selectedValue]);
+
   // const uploadNewImageHandler = () => {};
   return (
     <form className={style.addMenuModal_container} onSubmit={addNewMenuHandler}>
@@ -71,6 +126,45 @@ function AddMenuModal() {
           />
         </div>
         <div className={style.info}>
+          <div className={style.info_input_control}>
+            <label>
+              <input
+                type="radio"
+                value="meat"
+                checked={selectedValue === "meat"}
+                onChange={handleRadioChange}
+                required
+              />
+              <span>肉類</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="veg"
+                checked={selectedValue === "veg"}
+                onChange={handleRadioChange}
+              />
+              <span>蔬菜</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="ings"
+                checked={selectedValue === "ings"}
+                onChange={handleRadioChange}
+              />
+              <span>火鍋料</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="drink"
+                checked={selectedValue === "drink"}
+                onChange={handleRadioChange}
+              />
+              <span>飲料</span>
+            </label>
+          </div>
           <InputUI
             inputId="productName"
             inputPlaceholder="請輸入商品名稱"

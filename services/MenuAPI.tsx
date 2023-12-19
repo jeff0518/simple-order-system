@@ -1,13 +1,16 @@
 import axios from "axios";
 
 interface MenuProps {
-  productName: string;
-  placeOfOrigin: string;
-  sellingPrice: string;
-  image: string | ArrayBuffer;
+  productId: string;
+  productName?: string;
+  placeOfOrigin?: string;
+  sellingPrice?: string;
+  image?: string | ArrayBuffer;
+  isActive?: boolean;
 }
 
 export async function createMenu({
+  productId,
   productName,
   placeOfOrigin,
   sellingPrice,
@@ -15,6 +18,7 @@ export async function createMenu({
 }: MenuProps) {
   try {
     const response = await axios.post("/api/menu/addNewMenu", {
+      productId,
       productName,
       placeOfOrigin,
       sellingPrice,
@@ -42,18 +46,15 @@ export async function getMenu() {
   }
 }
 
-export async function upload(formData: any) {
-  console.log(formData);
-  // try {
-  //   const response = await axios.post("/api/menu/upload", {
-  //     formData,
-  //   });
-
-  //   console.log(response);
-
-  //   const data = await response.data;
-  //   console.log(data);
-  // } catch (error) {
-  //   console.log(error);
-  // }
+export async function patchIsActive({ productId, isActive }: MenuProps) {
+  console.log(productId, isActive);
+  try {
+    const { data } = await axios.patch("/api/menu/patchIsActive", {
+      productId,
+      isActive,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }

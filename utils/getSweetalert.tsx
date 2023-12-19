@@ -8,7 +8,7 @@ export const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
   showConfirmButton: false,
-  heightAuto: false,
+  // heightAuto: false,
   width: 300,
   timer: 2000,
 });

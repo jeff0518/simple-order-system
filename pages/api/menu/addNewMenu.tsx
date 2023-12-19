@@ -11,15 +11,18 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { productName, placeOfOrigin, sellingPrice, image } = req.body;
+  const { productId, productName, placeOfOrigin, sellingPrice, image } =
+    req.body;
   const client = await connectToDatabase();
   const db = client.db();
 
   const result = await db.collection("menu").insertOne({
+    productId: productId,
     name: productName,
     place: placeOfOrigin,
     selling: sellingPrice,
     imageUrl: image,
+    isActive: true,
   });
   console.log(result);
   res.status(201).json({ message: "建立菜單成功" });

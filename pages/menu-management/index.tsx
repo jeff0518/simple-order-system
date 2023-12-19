@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { IoMdAdd } from "react-icons/io";
 
 import { getMenu } from "@/services/MenuAPI";
 import { MenuProps } from "@/utils/type";
+import { MenuContext } from "@/context/MenuContext";
 import MenuCard from "@/components/card/MenuCard";
 
 import style from "./index.module.scss";
 function MenuManagement() {
-  const [menuData, setMenuData] = useState<MenuProps[]>([]);
+  const { menuData, setMenuData } = useContext(MenuContext);
   const router = useRouter();
 
   const fetchData = async () => {
@@ -30,7 +31,9 @@ function MenuManagement() {
           <button
             className={style.addImage__btn}
             onClick={() => {
-              router.push("/menu-management/addMenu");
+              router.push({
+                pathname: "/menu-management/addMenu",
+              });
             }}
           >
             <IoMdAdd size={50} />
@@ -38,13 +41,16 @@ function MenuManagement() {
         </div>
         <div className={style.imgBox}>
           {menuData &&
-            menuData.map((item) => {
+            menuData.map((item: MenuProps) => {
               return (
                 <MenuCard
+                  key={item.productId}
+                  productId={item.productId}
                   imageUrl={item.imageUrl}
                   name={item.name}
                   place={item.place}
                   selling={item.selling}
+                  isActive={item.isActive}
                 />
               );
             })}
