@@ -36,14 +36,12 @@ function AddMenuModal() {
         return itemSelectedValue === selectedValue;
       });
 
-      console.log(filteredData);
       if (filteredData.length > 0) {
         const maxNumber = Math.max(
           ...filteredData.map((item: any) =>
             parseInt(item.productId.split("_")[1], 10)
           )
         );
-        console.log(maxNumber);
         const formattedNumber = String(maxNumber + 1).padStart(5, "0");
         setProductId(selectedValue + "_" + formattedNumber);
       } else {

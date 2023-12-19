@@ -8,8 +8,9 @@ import { MenuContext } from "@/context/MenuContext";
 import MenuCard from "@/components/card/MenuCard";
 
 import style from "./index.module.scss";
+
 function MenuManagement() {
-  const { menuData, setMenuData } = useContext(MenuContext);
+  const { menuData, setMenuData, dataUpdated } = useContext(MenuContext);
   const router = useRouter();
 
   const fetchData = async () => {
@@ -23,7 +24,7 @@ function MenuManagement() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [dataUpdated]);
   return (
     <>
       <div className={style.menuManagement_container}>

@@ -47,7 +47,6 @@ export async function getMenu() {
 }
 
 export async function patchIsActive({ productId, isActive }: MenuProps) {
-  console.log(productId, isActive);
   try {
     const { data } = await axios.patch("/api/menu/patchIsActive", {
       productId,
@@ -58,3 +57,12 @@ export async function patchIsActive({ productId, isActive }: MenuProps) {
     console.log(error);
   }
 }
+
+export const deleteMenu = async (productId: string) => {
+  try {
+    const { data } = await axios.delete(`/api/menu/${productId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

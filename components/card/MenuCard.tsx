@@ -1,33 +1,39 @@
 import Image from "next/image";
+import { useState, useContext } from "react";
 
-import { patchIsActive } from "@/services/MenuAPI";
+import { patchIsActive, deleteMenu } from "@/services/MenuAPI";
 import ButtonUI from "../shared/ButtonUI";
 import { MenuProps } from "@/utils/type";
+import { MenuContext } from "@/context/MenuContext";
 
 import style from "./MenuCard.module.scss";
-import beef from "../../assets/image/beef.jpg";
 function MenuCard({
   productId,
   imageUrl,
   name,
   place,
   selling,
-  isActive,
+  isActive: initialIsActive,
 }: MenuProps) {
+  const { setDataUpdated } = useContext(MenuContext);
+  const [isActive, setIsActive] = useState(initialIsActive);
   const imgUrl = typeof imageUrl === "string" ? imageUrl : undefined;
 
   const changeIsActiveHandler = async () => {
-    console.log("轉換前： " + isActive);
-    isActive = !isActive;
-    console.log("轉換後： " + isActive);
-    const result = await patchIsActive({ isActive, productId });
-    console.log(result);
+    setIsActive((prev) => !prev);
+    await patchIsActive({ isActive: !isActive, productId });
+  };
+
+  const deleteMenuHandler = async () => {
+    await deleteMenu(productId).then(() => {
+      setDataUpdated((prev: boolean) => !prev);
+    });
   };
   return (
     <div className={style.menuCard_container}>
       {!isActive && (
         <div className={style.isActive}>
-          <p>售完！</p>
+          <p>此商品禁售！</p>
           <ButtonUI
             text="解除"
             btnStyle="btn__pill__modal"
@@ -69,7 +75,7 @@ function MenuCard({
           <ButtonUI
             text="刪除"
             btnStyle="btn__pill__small"
-            onClick={() => {}}
+            onClick={deleteMenuHandler}
           />
         </div>
       </div>
