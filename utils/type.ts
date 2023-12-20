@@ -19,7 +19,7 @@ export interface MenuProps {
   place: string;
   selling: string;
   imageUrl: string | ArrayBuffer;
-  isActive: boolean
+  isActive: boolean;
 }
 
 export interface CheckInProps {

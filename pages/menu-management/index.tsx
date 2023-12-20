@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { IoMdAdd } from "react-icons/io";
 
+import useAuthCheck from "@/hooks/useAuthCheck";
 import { getMenu } from "@/services/MenuAPI";
 import { MenuProps } from "@/utils/type";
 import { MenuContext } from "@/context/MenuContext";
@@ -10,6 +11,7 @@ import MenuCard from "@/components/card/MenuCard";
 import style from "./index.module.scss";
 
 function MenuManagement() {
+  useAuthCheck();
   const { menuData, setMenuData, dataUpdated } = useContext(MenuContext);
   const router = useRouter();
 

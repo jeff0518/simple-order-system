@@ -1,10 +1,10 @@
-import Image from "next/image";
 import { useState, useContext } from "react";
 
 import { patchIsActive, deleteMenu } from "@/services/MenuAPI";
 import ButtonUI from "../shared/ButtonUI";
 import { MenuProps } from "@/utils/type";
 import { MenuContext } from "@/context/MenuContext";
+import MenuIdModal from "../modal/MenuIdModal";
 
 import style from "./MenuCard.module.scss";
 function MenuCard({
@@ -17,7 +17,12 @@ function MenuCard({
 }: MenuProps) {
   const { setDataUpdated } = useContext(MenuContext);
   const [isActive, setIsActive] = useState(initialIsActive);
+  const [isShowModal, setIsShowModal] = useState(false);
   const imgUrl = typeof imageUrl === "string" ? imageUrl : undefined;
+
+  const closeShowModalHandler = () => {
+    setIsShowModal(false);
+  };
 
   const changeIsActiveHandler = async () => {
     setIsActive((prev) => !prev);
@@ -30,26 +35,37 @@ function MenuCard({
     });
   };
   return (
-    <div className={style.menuCard_container}>
-      {!isActive && (
-        <div className={style.isActive}>
-          <p>此商品禁售！</p>
-          <ButtonUI
-            text="解除"
-            btnStyle="btn__pill__modal"
-            onClick={changeIsActiveHandler}
-          />
-        </div>
+    <>
+      {isShowModal && (
+        <MenuIdModal
+          productId={productId}
+          imageUrl={imgUrl}
+          name={name}
+          place={place}
+          selling={selling}
+          onClick={closeShowModalHandler}
+        />
       )}
-      <img
-        src={imgUrl}
-        alt="圖片"
-        className={style.menuCard_container_img}
-        width={300}
-        height={200}
-        style={{ objectFit: "fill" }}
-      />
-      {/* <Image
+      <div className={style.menuCard_container}>
+        {!isActive && (
+          <div className={style.isActive}>
+            <p>此商品禁售！</p>
+            <ButtonUI
+              text="解除"
+              btnStyle="btn__pill__modal"
+              onClick={changeIsActiveHandler}
+            />
+          </div>
+        )}
+        <img
+          src={imgUrl}
+          alt="圖片"
+          className={style.menuCard_container_img}
+          width={300}
+          height={200}
+          style={{ objectFit: "fill" }}
+        />
+        {/* <Image
         src={imgUrl ? imgUrl : beef}
         width={300}
         height={200}
@@ -57,29 +73,32 @@ function MenuCard({
         objectFit="fill"
         className={style.menuCard_container_img}
       /> */}
-      <div className={style.menuCard_container_info}>
-        <div className={style.title}>品名：{name}</div>
-        <div className={style.origin}>產地：{place}</div>
-        <div className={style.sellingPrice}>售價： {selling} 元</div>
-        <div className={style.controlPanel}>
-          <ButtonUI
-            text="修改"
-            btnStyle="btn__pill__small"
-            onClick={() => {}}
-          />
-          <ButtonUI
-            text="禁售"
-            btnStyle="btn__pill__small"
-            onClick={changeIsActiveHandler}
-          />
-          <ButtonUI
-            text="刪除"
-            btnStyle="btn__pill__small"
-            onClick={deleteMenuHandler}
-          />
+        <div className={style.menuCard_container_info}>
+          <div className={style.title}>品名：{name}</div>
+          <div className={style.origin}>產地：{place}</div>
+          <div className={style.sellingPrice}>售價： {selling} 元</div>
+          <div className={style.controlPanel}>
+            <ButtonUI
+              text="修改"
+              btnStyle="btn__pill__small"
+              onClick={() => {
+                setIsShowModal(true);
+              }}
+            />
+            <ButtonUI
+              text="禁售"
+              btnStyle="btn__pill__small"
+              onClick={changeIsActiveHandler}
+            />
+            <ButtonUI
+              text="刪除"
+              btnStyle="btn__pill__small"
+              onClick={deleteMenuHandler}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 export default MenuCard;

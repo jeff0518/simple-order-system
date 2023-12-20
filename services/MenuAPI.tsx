@@ -46,6 +46,22 @@ export async function getMenu() {
   }
 }
 
+export const patchMenu = async (props: MenuProps) => {
+  const { productId, productName, placeOfOrigin, sellingPrice, image } = props;
+  try {
+    const { data } = await axios.patch("/api/menu/patchMenu", {
+      productId,
+      productName,
+      placeOfOrigin,
+      sellingPrice,
+      image,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export async function patchIsActive({ productId, isActive }: MenuProps) {
   try {
     const { data } = await axios.patch("/api/menu/patchIsActive", {
