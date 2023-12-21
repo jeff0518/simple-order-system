@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
 
+import { ShoppingCarProps } from "@/utils/type";
 import OrderModal from "../modal/main/OrderModal";
 import ButtonUI from "../shared/ButtonUI";
 import style from "./TableCard.module.scss";
 
 interface TableCardProps {
-  tableId: number;
+  tableId: string;
   totalAmount: number;
   diningTime: string;
 }
 
 function TableCard(props: TableCardProps) {
   const { tableId, totalAmount, diningTime } = props;
+  const [shoppingCar, setShoppingCar] = useState<ShoppingCarProps[]>([]);
   const [isShowOrderModal, setIsShowOrderModal] = useState(false);
 
   const closeModalHandler = () => {
@@ -24,7 +26,14 @@ function TableCard(props: TableCardProps) {
   const checkoutHandler = () => {};
   return (
     <>
-      {isShowOrderModal && <OrderModal onClick={closeModalHandler} />}
+      {isShowOrderModal && (
+        <OrderModal
+          tableId={tableId}
+          shoppingCar={shoppingCar}
+          setShoppingCar={setShoppingCar}
+          onClick={closeModalHandler}
+        />
+      )}
       <div className={style.tableCard_container}>
         {/* 桌號 */}
         <div className={style.title}>{tableId}</div>

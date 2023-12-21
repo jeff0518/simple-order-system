@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 export type FormEvent = React.FormEvent<HTMLFormElement>
 export type MouseEvent = React.MouseEvent<HTMLButtonElement>
 export type ChangeEvent = React.ChangeEvent<HTMLInputElement>
@@ -28,3 +29,15 @@ export interface CheckInProps {
     numberId: string;
   };
 }
+
+export interface ShoppingCarProps {
+  tableId: string;
+  items: [{
+    productId: string;
+    quantity: number;
+  }];
+}
+
+export type ContextProviderProps = {
+  children: ReactNode;
+};

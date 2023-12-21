@@ -34,6 +34,7 @@ function Main() {
         tableData.map((item: any) => {
           return (
             <TableCard
+              key={item.tableId}
               tableId={item.tableId}
               totalAmount={1000}
               diningTime={"12:30"}
