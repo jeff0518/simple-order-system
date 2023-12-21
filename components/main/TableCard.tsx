@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
-import ButtonUI from "../shared/ButtonUI";
 
+import OrderModal from "../modal/main/OrderModal";
+import ButtonUI from "../shared/ButtonUI";
 import style from "./TableCard.module.scss";
 
 interface TableCardProps {
@@ -11,27 +13,41 @@ interface TableCardProps {
 
 function TableCard(props: TableCardProps) {
   const { tableId, totalAmount, diningTime } = props;
-  const orderHandler = () => {};
+  const [isShowOrderModal, setIsShowOrderModal] = useState(false);
+
+  const closeModalHandler = () => {
+    setIsShowOrderModal(false);
+  };
+  const orderHandler = () => {
+    setIsShowOrderModal(true);
+  };
   const checkoutHandler = () => {};
   return (
-    <div className={style.tableCard_container}>
-      {/* 桌號 */}
-      <div className={style.title}>{tableId}桌</div>
-      {/* 顯示資訊 */}
-      <div className={style.information}>
-        <div className={style.info_icon}>
-          <AiFillDollarCircle />：{totalAmount}
+    <>
+      {isShowOrderModal && <OrderModal onClick={closeModalHandler} />}
+      <div className={style.tableCard_container}>
+        {/* 桌號 */}
+        <div className={style.title}>{tableId}</div>
+        {/* 顯示資訊 */}
+        <div className={style.information}>
+          <div className={style.info_icon}>
+            <AiFillDollarCircle />：{totalAmount}
+          </div>
+          <div className={style.info_icon}>
+            <AiFillClockCircle />：{diningTime}
+          </div>
         </div>
-        <div className={style.info_icon}>
-          <AiFillClockCircle />：{diningTime}
+        {/* 控制面板（點餐、結帳） */}
+        <div className={style.control}>
+          <ButtonUI text="點餐" btnStyle="btn__pill" onClick={orderHandler} />
+          <ButtonUI
+            text="結帳"
+            btnStyle="btn__pill"
+            onClick={checkoutHandler}
+          />
         </div>
       </div>
-      {/* 控制面板（點餐、結帳） */}
-      <div className={style.control}>
-        <ButtonUI text="點餐" btnStyle="btn__pill" onClick={orderHandler} />
-        <ButtonUI text="結帳" btnStyle="btn__pill" onClick={checkoutHandler} />
-      </div>
-    </div>
+    </>
   );
 }
 

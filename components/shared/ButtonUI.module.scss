@@ -50,6 +50,22 @@
   }
 }
 
+.btn__pill__order {
+  width: 50%;
+  height: 1.5rem;
+  @include center-both;
+  @include text-styles(0.75rem, 500, color.$gray-10);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.$gray-10;
+    color: color.$gray-1;
+    transform: scale(1.1, 1.1);
+  }
+}
+
 .btn__checkIn__pill {
   width: 100%;
   height: 3rem;
