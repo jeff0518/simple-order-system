@@ -7,8 +7,6 @@
   min-width: 10rem;
   max-width: 17rem;
   height: 7rem;
-  @include center-both;
-  gap: 0.5rem;
   background-color: color.$primary-color;
   border-radius: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -30,33 +28,60 @@
     border-radius: 30px;
   }
 
-  .imgBox {
+  .card_container {
     width: 100%;
-    height: 100%;
+    height: 70%;
+    @include center-both;
+    gap: 0.5rem;
 
-    &_img {
+    .imgBox {
       width: 100%;
       height: 100%;
-      border-radius: 30px;
-      overflow: hidden;
+
+      &_img {
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        overflow: hidden;
+      }
+    }
+
+    .orderBox {
+      width: 100%;
+      height: 100%;
+      @include text-styles(1rem, 500, color.$gray-2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .info {
+        width: 100%;
+      }
+
+      .quantityBox {
+        width: 100%;
+        height: 1rem;
+        padding-right: 1rem;
+        @include center-both;
+        gap: 0.5rem;
+
+        .input {
+          width: 50%;
+          height: 1rem;
+          @include center-both;
+          color: color.$gray-10;
+          background-color: color.$gray-2;
+          border-radius: 10px;
+        }
+      }
     }
   }
 
-  .orderBox {
+  .btn {
     width: 100%;
-    height: 100%;
-    @include text-styles(1rem, 500, color.$gray-2);
+    height: 20%;
+    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    .info {
-      width: 100%;
-    }
-    .btn {
-      width: 100%;
-      padding-right: 1rem;
-      display: flex;
-      justify-content: flex-end;
-    }
+    align-items: center;
   }
 }

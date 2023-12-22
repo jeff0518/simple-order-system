@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
+
 import { MenuProps } from "@/utils/type";
 import { ShoppingCarProps } from "@/utils/type";
 import ButtonUI from "../shared/ButtonUI";
@@ -19,7 +22,24 @@ function OrderMenuCard({
   shoppingCar,
   setShoppingCar,
 }: OrderMenuCardProps) {
+  const [quantity, setQuantity] = useState(0);
   const imgUrl = typeof imageUrl === "string" ? imageUrl : undefined;
+
+  const addQuantityHandler = () => {
+    let newQuantity = quantity + 1;
+    if (newQuantity >= 10) {
+      newQuantity = 10;
+    }
+    setQuantity(newQuantity);
+  };
+  const removeQuantityHandler = () => {
+    if (quantity === 0) {
+      return;
+    } else {
+      let newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+    }
+  };
 
   const addToShoppingCarHandler = () => {
     const isTableIdExist = shoppingCar.some((item) => {
@@ -33,23 +53,25 @@ function OrderMenuCard({
             (product) => product.productId === productId
           );
           if (existingItem) {
-            existingItem.quantity += 1;
+            existingItem.quantity += quantity;
           } else {
-            item.items.push({ productId: productId, quantity: 1 });
+            item.items.push({ productId: productId, quantity: quantity });
           }
         }
         return item;
       });
 
       setShoppingCar(updatedShoppingCar);
+      setQuantity(0);
     } else {
       setShoppingCar([
         ...shoppingCar,
         {
           tableId: tableId,
-          items: [{ productId: productId, quantity: 1 }],
+          items: [{ productId: productId, quantity: quantity }],
         },
       ]);
+      setQuantity(0);
     }
   };
   return (
@@ -59,27 +81,35 @@ function OrderMenuCard({
           <p>此商品已售完！</p>
         </div>
       )}
-      <div className={style.imgBox}>
-        <img
-          src={imgUrl}
-          alt="圖片"
-          className={style.imgBox_img}
-          width={180}
-          height={120}
-        />
-      </div>
-      <div className={style.orderBox}>
-        <div className={style.info}>
-          <p>名稱： {name}</p>
-          <p>售價： {selling} 元</p>
-        </div>
-        <div className={style.btn}>
-          <ButtonUI
-            text="加入"
-            btnStyle="btn__pill__order"
-            onClick={addToShoppingCarHandler}
+      <div className={style.card_container}>
+        <div className={style.imgBox}>
+          <img
+            src={imgUrl}
+            alt="圖片"
+            className={style.imgBox_img}
+            width={180}
+            height={120}
           />
         </div>
+        <div className={style.orderBox}>
+          <div className={style.info}>
+            <p>名稱： {name}</p>
+            <p>售價： {selling} 元</p>
+          </div>
+          <div className={style.quantityBox}>
+            <IoRemoveCircle size={20} onClick={removeQuantityHandler} />
+            <div className={style.input}>{quantity}</div>
+            {/* <input value={quantity} /> */}
+            <IoAddCircle size={20} onClick={addQuantityHandler} />
+          </div>
+        </div>
+      </div>
+      <div className={style.btn}>
+        <ButtonUI
+          text="加入"
+          btnStyle="btn__pill__order"
+          onClick={addToShoppingCarHandler}
+        />
       </div>
     </div>
   );
