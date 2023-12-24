@@ -34,8 +34,11 @@ export interface ShoppingCarProps {
   tableId: string;
   items: [{
     productId: string;
+    name:string,
     quantity: number;
+    selling:string;
   }];
+  totalAmount:number;
 }
 
 export type ContextProviderProps = {

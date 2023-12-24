@@ -55,7 +55,12 @@ function OrderMenuCard({
           if (existingItem) {
             existingItem.quantity += quantity;
           } else {
-            item.items.push({ productId: productId, quantity: quantity });
+            item.items.push({
+              productId: productId,
+              name: name,
+              quantity: quantity,
+              selling: selling,
+            });
           }
         }
         return item;
@@ -68,7 +73,15 @@ function OrderMenuCard({
         ...shoppingCar,
         {
           tableId: tableId,
-          items: [{ productId: productId, quantity: quantity }],
+          items: [
+            {
+              productId: productId,
+              name: name,
+              quantity: quantity,
+              selling: selling,
+            },
+          ],
+          totalAmount: 0,
         },
       ]);
       setQuantity(0);
@@ -99,14 +112,13 @@ function OrderMenuCard({
           <div className={style.quantityBox}>
             <IoRemoveCircle size={20} onClick={removeQuantityHandler} />
             <div className={style.input}>{quantity}</div>
-            {/* <input value={quantity} /> */}
             <IoAddCircle size={20} onClick={addQuantityHandler} />
           </div>
         </div>
       </div>
       <div className={style.btn}>
         <ButtonUI
-          text="加入"
+          text="加入購物車"
           btnStyle="btn__pill__order"
           onClick={addToShoppingCarHandler}
         />

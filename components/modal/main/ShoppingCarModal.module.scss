@@ -1,0 +1,44 @@
+@use "/styles/colors" as color;
+@import "/styles/mixin";
+
+.shoppingCarModal_container {
+  width: 50%;
+  height: 40%;
+  padding: 1rem;
+  position: fixed;
+  top: 57%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border: 1px solid color.$gray-8;
+  border-radius: 30px;
+  background-color: color.$secondary-light-color;
+  @include text-styles(1.25rem, 500, color.$gray-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 200;
+
+  .infoBox {
+    width: 100%;
+    display: flex;
+
+    .name {
+      width: 60%;
+    }
+    .quantity {
+      width: 30%;
+    }
+  }
+
+  .btnBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+
+    .money {
+      margin-right: 2rem;
+    }
+  }
+}
