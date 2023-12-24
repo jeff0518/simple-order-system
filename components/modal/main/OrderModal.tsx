@@ -3,9 +3,10 @@ import { TiShoppingCart } from "react-icons/ti";
 
 import { getMenu } from "@/services/MenuAPI";
 import { MenuProps, ShoppingCarProps } from "@/utils/type";
-import { postShoppingCar } from "@/services/OrderAPI";
+import { patchShoppingCar } from "@/services/OrderAPI";
 import OrderMenuCard from "@/components/card/OrderMenuCard";
 import ShoppingCarModal from "./ShoppingCarModal";
+import { Alert } from "@/utils/getSweetalert";
 import style from "./OrderModal.module.scss";
 
 interface OrderModalProps {
@@ -34,7 +35,7 @@ function OrderModal({
 
   const uploadData = async () => {
     try {
-      const data = await postShoppingCar(shoppingCar);
+      const data = await patchShoppingCar(shoppingCar);
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +51,7 @@ function OrderModal({
         <ShoppingCarModal
           shoppingCar={shoppingCar}
           setShoppingCar={setShoppingCar}
+          uploadData={uploadData}
         />
       )}
       <div className={style.backdrop} onClick={onClick} />
@@ -58,6 +60,13 @@ function OrderModal({
           <button
             className={style.addImage__btn}
             onClick={() => {
+              if (shoppingCar.length === 0) {
+                Alert.fire({
+                  title: "您還沒有點餐！",
+                  icon: "error",
+                });
+                return;
+              }
               setIsShowShoppingCar((prev) => !prev);
             }}
           >

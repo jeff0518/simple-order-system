@@ -20,6 +20,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   }
 
+  if (req.method === "PATCH") {
+    const data = req.body; //object :items, tableId, totalAmount
+
+    try {
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+
   client.close();
 }
 
