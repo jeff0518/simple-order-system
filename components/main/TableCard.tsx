@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
 
 import { ShoppingCarProps } from "@/utils/type";
@@ -15,6 +15,7 @@ interface TableCardProps {
 function TableCard(props: TableCardProps) {
   const { tableId, totalAmount, diningTime } = props;
   const [shoppingCar, setShoppingCar] = useState<ShoppingCarProps[]>([]);
+  const [dataBase, setDataBase] = useState<ShoppingCarProps[]>([]);
   const [isShowOrderModal, setIsShowOrderModal] = useState(false);
 
   const closeModalHandler = () => {
@@ -24,6 +25,8 @@ function TableCard(props: TableCardProps) {
     setIsShowOrderModal(true);
   };
   const checkoutHandler = () => {};
+
+  useEffect(() => {}, []);
   return (
     <>
       {isShowOrderModal && (
@@ -31,6 +34,8 @@ function TableCard(props: TableCardProps) {
           tableId={tableId}
           shoppingCar={shoppingCar}
           setShoppingCar={setShoppingCar}
+          dataBase={dataBase}
+          setDataBase={setDataBase}
           onClick={closeModalHandler}
         />
       )}

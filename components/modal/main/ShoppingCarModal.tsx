@@ -2,25 +2,86 @@ import { useEffect } from "react";
 
 import { ShoppingCarProps } from "@/utils/type";
 import { Alert, Dialog } from "@/utils/getSweetalert";
+import { patchShoppingCar } from "@/services/OrderAPI";
 import ButtonUI from "@/components/shared/ButtonUI";
 import style from "./ShoppingCarModal.module.scss";
 
 interface ShoppingCarModalProps {
   shoppingCar: ShoppingCarProps[];
   setShoppingCar: (shoppingCar: ShoppingCarProps[]) => void;
-  uploadData: () => void;
+  dataBase: ShoppingCarProps[];
+  setDataBase: any;
+  setIsShowShoppingCar: (prev: boolean) => void;
+  onClick: () => void;
 }
 
 function ShoppingCarModal({
   shoppingCar,
   setShoppingCar,
-  uploadData,
+  dataBase,
+  setDataBase,
+  setIsShowShoppingCar,
+  onClick,
 }: ShoppingCarModalProps) {
-  const { items, totalAmount } = shoppingCar[0];
+  const { items, totalAmount, tableId } = shoppingCar[0];
   const newTotalAmount = items.reduce(
     (accumulator, item) => accumulator + item.quantity * Number(item.selling),
     0
   );
+
+  const closeShoppingCarHandler = () => {
+    setShoppingCar([]);
+  };
+
+  const uploadShoppingCar = () => {
+    if (dataBase.length === 0) {
+      uploadData(shoppingCar);
+      setDataBase(shoppingCar);
+    } else {
+      let newAmount =
+        Number(dataBase[0].totalAmount) + Number(shoppingCar[0].totalAmount);
+
+      let newItems = dataBase[0].items;
+
+      shoppingCar[0].items.map((item) => {
+        let fount = false;
+        const dataBaseItem = dataBase[0].items;
+
+        for (let i = 0; i < dataBase[0].items.length; i++) {
+          if (item.productId === dataBaseItem[i].productId) {
+            newItems[i].quantity += item.quantity;
+            fount = true;
+          }
+        }
+
+        if (!fount) {
+          newItems.push(item);
+        }
+
+        console.log("newItems: ", newItems);
+      });
+
+      const updatedShoppingCar = [
+        {
+          items: newItems,
+          tableId: tableId,
+          totalAmount: newAmount,
+        },
+      ];
+      uploadData(updatedShoppingCar);
+      setDataBase(updatedShoppingCar);
+    }
+  };
+
+  const uploadData = async (shoppingCarData: any) => {
+    try {
+      const result = await patchShoppingCar(shoppingCarData);
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onClickToAPIHandler = () => {
     Dialog.fire({
@@ -34,7 +95,10 @@ function ShoppingCarModal({
           title: "點餐已送出!",
           icon: "success",
         });
-        uploadData();
+        uploadShoppingCar();
+        closeShoppingCarHandler();
+        // setIsShowShoppingCar(false);
+        onClick();
       }
     });
   };

@@ -3,7 +3,6 @@ import { TiShoppingCart } from "react-icons/ti";
 
 import { getMenu } from "@/services/MenuAPI";
 import { MenuProps, ShoppingCarProps } from "@/utils/type";
-import { patchShoppingCar } from "@/services/OrderAPI";
 import OrderMenuCard from "@/components/card/OrderMenuCard";
 import ShoppingCarModal from "./ShoppingCarModal";
 import { Alert } from "@/utils/getSweetalert";
@@ -13,6 +12,8 @@ interface OrderModalProps {
   tableId: string;
   shoppingCar: ShoppingCarProps[];
   setShoppingCar: (shoppingCar: ShoppingCarProps[]) => void;
+  dataBase: ShoppingCarProps[];
+  setDataBase: (shoppingCar: ShoppingCarProps[]) => void;
   onClick: () => void;
 }
 function OrderModal({
@@ -20,11 +21,13 @@ function OrderModal({
   tableId,
   shoppingCar,
   setShoppingCar,
+  dataBase,
+  setDataBase,
 }: OrderModalProps) {
   const [menuData, setMenuData] = useState([]);
   const [isShowShoppingCar, setIsShowShoppingCar] = useState(false);
 
-  const fetchData = async () => {
+  const fetchMenuData = async () => {
     try {
       const { data } = await getMenu();
       setMenuData(data);
@@ -33,25 +36,19 @@ function OrderModal({
     }
   };
 
-  const uploadData = async () => {
-    try {
-      const data = await patchShoppingCar(shoppingCar);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    fetchData();
-    // console.log("這是：", tableId, " 的 ", shoppingCar);
-  }, [shoppingCar]);
+    fetchMenuData();
+  }, []);
   return (
     <>
       {isShowShoppingCar && (
         <ShoppingCarModal
           shoppingCar={shoppingCar}
           setShoppingCar={setShoppingCar}
-          uploadData={uploadData}
+          dataBase={dataBase}
+          setDataBase={setDataBase}
+          onClick={onClick}
+          setIsShowShoppingCar={setIsShowShoppingCar}
         />
       )}
       <div className={style.backdrop} onClick={onClick} />

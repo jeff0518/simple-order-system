@@ -9,29 +9,17 @@ import { connectToDatabase } from "@/services/db";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const client = await connectToDatabase();
   const db = client.db();
-
+  console.log("有進來！");
   if (req.method === "GET") {
-    try {
-      const result = await db.collection("table").find().toArray();
-
-      res.status(200).json({ data: result });
-    } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+    const { shoppingCar } = req.query;
+    if (shoppingCar === undefined) {
+      return;
     }
-  }
-
-  if (req.method === "PATCH") {
-    const { items, tableId, totalAmount } = req.body;
+    console.log("data", shoppingCar);
     try {
-      const result = await db.collection("table").updateOne(
-        { tableId: tableId },
-        {
-          $set: {
-            totalAmount: totalAmount,
-            shoppingCar: items,
-          },
-        }
-      );
+      const result = await db
+        .collection("table")
+        .findOne({ tableId: shoppingCar[0] });
 
       if (!result) {
         res.status(404).json({ error: "找不到此桌子" });
@@ -42,8 +30,5 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
-
-  client.close();
 }
-
 export default handler;

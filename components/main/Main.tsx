@@ -27,6 +27,10 @@ function Main() {
 
   useEffect(() => {
     fetchData();
+
+    return () => {
+      // 清理操作，例如取消異步操作
+    };
   }, []);
   return (
     <div className={style.main_container}>
