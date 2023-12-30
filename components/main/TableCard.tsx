@@ -3,6 +3,7 @@ import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
 
 import { ShoppingCarProps } from "@/utils/type";
 import OrderModal from "../modal/main/OrderModal";
+import CheckoutModal from "../modal/main/CheckoutModal";
 import ButtonUI from "../shared/ButtonUI";
 import style from "./TableCard.module.scss";
 
@@ -10,21 +11,26 @@ interface TableCardProps {
   tableId: string;
   totalAmount: number;
   diningTime: string;
+  isActive: boolean;
 }
 
 function TableCard(props: TableCardProps) {
-  const { tableId, totalAmount, diningTime } = props;
+  const { tableId, totalAmount, diningTime, isActive } = props;
   const [shoppingCar, setShoppingCar] = useState<ShoppingCarProps[]>([]);
   const [dataBase, setDataBase] = useState<ShoppingCarProps[]>([]);
   const [isShowOrderModal, setIsShowOrderModal] = useState(false);
+  const [isShowCheckout, setIsShowCheckout] = useState(false);
 
   const closeModalHandler = () => {
     setIsShowOrderModal(false);
+    setIsShowCheckout(false);
   };
   const orderHandler = () => {
     setIsShowOrderModal(true);
   };
-  const checkoutHandler = () => {};
+  const checkoutHandler = () => {
+    setIsShowCheckout(true);
+  };
 
   useEffect(() => {}, []);
   return (
@@ -39,7 +45,14 @@ function TableCard(props: TableCardProps) {
           onClick={closeModalHandler}
         />
       )}
-      <div className={style.tableCard_container}>
+      {isShowCheckout && (
+        <CheckoutModal tableId={tableId} onClick={closeModalHandler} />
+      )}
+      <div
+        className={`${style.tableCard_container} ${
+          isActive ? style.isActive : style.isNotActive
+        }`}
+      >
         {/* 桌號 */}
         <div className={style.title}>{tableId}</div>
         {/* 顯示資訊 */}

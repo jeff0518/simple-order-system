@@ -27,10 +27,6 @@ function Main() {
 
   useEffect(() => {
     fetchData();
-
-    return () => {
-      // 清理操作，例如取消異步操作
-    };
   }, []);
   return (
     <div className={style.main_container}>
@@ -39,9 +35,10 @@ function Main() {
           return (
             <TableCard
               key={item.tableId}
+              isActive={item.isActive}
               tableId={item.tableId}
-              totalAmount={1000}
-              diningTime={"12:30"}
+              totalAmount={item.isActive ? item.totalAmount : "0"}
+              diningTime={item.isActive ? item.diningTime : "未點餐"}
             />
           );
         })}

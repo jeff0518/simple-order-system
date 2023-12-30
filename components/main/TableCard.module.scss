@@ -1,6 +1,16 @@
 @use "../../styles/colors" as color;
 @import "../../styles/mixin";
 
+.isActive {
+  background-color: color.$error-color;
+  color: color.$gray-10;
+}
+
+.isNotActive {
+  background-color: color.$brand-light-color;
+  color: color.$gray-1;
+}
+
 .tableCard_container {
   width: 12rem;
   height: 8rem;
@@ -9,12 +19,11 @@
   flex-direction: column;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: color.$brand-light-color;
 
   .title {
     width: 100%;
     @include center-both;
-    @include text-styles(1.5rem, 500, color.$gray-8);
+    @include text-styles(1.5rem, 500, color.$gray-10);
     border-bottom: 2px solid color.$gray-10;
   }
 

@@ -26,7 +26,6 @@ function OrderModal({
 }: OrderModalProps) {
   const [menuData, setMenuData] = useState([]);
   const [isShowShoppingCar, setIsShowShoppingCar] = useState(false);
-
   const fetchMenuData = async () => {
     try {
       const { data } = await getMenu();
