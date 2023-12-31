@@ -15,6 +15,7 @@ interface Props {
 function Main() {
   useAuthCheck();
   const [tableData, setTableData] = useState([]);
+  const [update, setUpdate] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -27,7 +28,8 @@ function Main() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    setUpdate(true);
+  }, [update]);
   return (
     <div className={style.main_container}>
       {tableData &&
@@ -39,6 +41,7 @@ function Main() {
               tableId={item.tableId}
               totalAmount={item.isActive ? item.totalAmount : "0"}
               diningTime={item.isActive ? item.diningTime : "未點餐"}
+              setUpdate={setUpdate}
             />
           );
         })}

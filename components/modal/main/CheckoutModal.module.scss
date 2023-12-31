@@ -53,5 +53,13 @@
 
   .btnBox {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .totalAmount {
+      width: 70%;
+      margin-bottom: 3rem;
+    }
   }
 }

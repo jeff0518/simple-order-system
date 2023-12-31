@@ -32,10 +32,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         return;
       }
 
-      console.log(existingTable.isActive);
-
-      console.log(typeof existingTable.isActive);
-
       if (existingTable.isActive === false) {
         const result = await db.collection("table").updateOne(
           { tableId: tableId },

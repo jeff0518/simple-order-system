@@ -12,10 +12,11 @@ interface TableCardProps {
   totalAmount: number;
   diningTime: string;
   isActive: boolean;
+  setUpdate: (perv: boolean) => void;
 }
 
 function TableCard(props: TableCardProps) {
-  const { tableId, totalAmount, diningTime, isActive } = props;
+  const { tableId, totalAmount, diningTime, isActive, setUpdate } = props;
   const [shoppingCar, setShoppingCar] = useState<ShoppingCarProps[]>([]);
   const [dataBase, setDataBase] = useState<ShoppingCarProps[]>([]);
   const [isShowOrderModal, setIsShowOrderModal] = useState(false);
@@ -32,7 +33,9 @@ function TableCard(props: TableCardProps) {
     setIsShowCheckout(true);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setUpdate(false);
+  }, [closeModalHandler]);
   return (
     <>
       {isShowOrderModal && (
@@ -46,7 +49,12 @@ function TableCard(props: TableCardProps) {
         />
       )}
       {isShowCheckout && (
-        <CheckoutModal tableId={tableId} onClick={closeModalHandler} />
+        <CheckoutModal
+          tableId={tableId}
+          onClick={closeModalHandler}
+          setShoppingCar={setShoppingCar}
+          setDataBase={setDataBase}
+        />
       )}
       <div
         className={`${style.tableCard_container} ${

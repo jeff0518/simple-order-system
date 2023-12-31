@@ -25,3 +25,8 @@ export const Dialog = Swal.mixin({
   cancelButtonColor: "#d33",
   width: 1200,
 });
+
+export const Checkout = Swal.mixin({
+  showConfirmButton: true,
+  width: 1200,
+});

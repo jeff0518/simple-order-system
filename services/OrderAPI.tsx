@@ -32,7 +32,23 @@ export async function patchShoppingCar(props: PatchProps[]) {
       totalAmount,
     });
 
-    console.log(response);
+    const data = response.data;
+
+    if (response.status >= 200 && response.status < 300) {
+      return data;
+    } else {
+      throw new Error(data.message || "Something went wrong");
+    }
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+}
+
+export async function getCheckout(tableId: string) {
+  try {
+    const response = await axios.patch(`/api/main/${tableId}`, {
+      tableId,
+    });
 
     const data = response.data;
 
