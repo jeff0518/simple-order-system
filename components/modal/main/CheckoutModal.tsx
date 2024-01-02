@@ -12,7 +12,7 @@ interface CheckoutProps {
   tableId: string;
   onClick: () => void;
   setTemporary: (temporary: ShoppingCarProps[]) => void;
-  setDataBase: (shoppingCar: TableDataBase) => void;
+  setDataBase: any;
 }
 
 interface CheckoutData {
@@ -36,13 +36,7 @@ function CheckoutModal({
 }: CheckoutProps) {
   const [checkoutData, setCheckoutData] = useState<CheckoutData | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
-
-  if (!checkoutData && !isOrderPlaced) {
-    Toast.fire({ icon: "warning", title: "還沒有點餐!" });
-    setIsOrderPlaced(true); // 避免重複顯示 Toast
-    onClick();
-  }
+  // const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const fetchCheckoutData = async () => {
     try {
@@ -62,7 +56,8 @@ function CheckoutModal({
           title: `今天消費為 ${checkoutData?.totalAmount} 元`,
           text: "感謝您今日的消費",
         });
-        setIsOrderPlaced(true);
+        // setIsOrderPlaced(true);
+        onClick();
       }
     } catch (error) {
       console.log(error);
@@ -76,11 +71,17 @@ function CheckoutModal({
   }, [isLoading]);
 
   useEffect(() => {
-    if (isOrderPlaced) {
-      setTemporary([]);
-      // setDataBase([]);
-    }
-  }, [isOrderPlaced, setTemporary, setDataBase]);
+    const updatedShoppingCar = [
+      {
+        shoppingCar: [],
+        tableId: tableId,
+        totalAmount: 0,
+      },
+    ];
+
+    setTemporary([]);
+    setDataBase(updatedShoppingCar);
+  }, [setTemporary, setDataBase]);
   return (
     <>
       {isLoading && <Loading />}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AiFillDollarCircle, AiFillClockCircle } from "react-icons/ai";
 
 import { ShoppingCarProps, TableDataBase } from "@/utils/type";
+import { Toast } from "@/utils/getSweetalert";
 import OrderModal from "../modal/main/OrderModal";
 import CheckoutModal from "../modal/main/CheckoutModal";
 import ButtonUI from "../shared/ButtonUI";
@@ -39,11 +40,16 @@ function TableCard(props: TableCardProps) {
     setIsShowOrderModal(true);
   };
   const checkoutHandler = () => {
-    setIsShowCheckout(true);
+    if (!isActive) {
+      Toast.fire({ icon: "warning", title: "還沒有點餐!" });
+      // setIsOrderPlaced(true); // 避免重複顯示 Toast
+      // onClick();
+    } else {
+      setIsShowCheckout(true);
+    }
   };
 
   useEffect(() => {
-    console.log("tableCard有執行");
     setDataBase(tableDataBase);
   }, []);
 
