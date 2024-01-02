@@ -37,6 +37,8 @@ function AuthForm() {
         password: enterPassword,
       });
 
+      console.log(result);
+
       if (result && !result.error) {
         Toast.fire({
           icon: "success",

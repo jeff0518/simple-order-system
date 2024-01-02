@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/services/db";
 import { verifyPassword } from "@/services/auth";
 
 export const authOptions: NextAuthOptions = {
+  secret: `${process.env.NEXTAUTH_SECRET}`,
   session: {
     strategy: "jwt",
   },
