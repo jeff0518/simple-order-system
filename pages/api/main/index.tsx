@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "PATCH") {
-    const { items, tableId, totalAmount } = req.body;
+    const { shoppingCar, tableId, totalAmount } = req.body;
     try {
       const existingTable = await db
         .collection("table")
@@ -39,7 +39,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             $set: {
               isActive: true,
               totalAmount: totalAmount,
-              shoppingCar: items,
+              shoppingCar: shoppingCar,
               diningTime: new Date().toLocaleTimeString(),
             },
           }
@@ -51,7 +51,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           {
             $set: {
               totalAmount: totalAmount,
-              shoppingCar: items,
+              shoppingCar: shoppingCar,
             },
           }
         );

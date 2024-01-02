@@ -8,8 +8,8 @@ import style from "./OrderMenuCard.module.scss";
 
 interface OrderMenuCardProps extends MenuProps {
   tableId: string;
-  shoppingCar: ShoppingCarProps[];
-  setShoppingCar: (shoppingCar: ShoppingCarProps[]) => void;
+  temporary: ShoppingCarProps[];
+  setTemporary: (temporary: ShoppingCarProps[]) => void;
 }
 
 function OrderMenuCard({
@@ -19,8 +19,8 @@ function OrderMenuCard({
   selling,
   isActive,
   tableId,
-  shoppingCar,
-  setShoppingCar,
+  temporary,
+  setTemporary,
 }: OrderMenuCardProps) {
   const [quantity, setQuantity] = useState(0);
   const imgUrl = typeof imageUrl === "string" ? imageUrl : undefined;
@@ -42,20 +42,20 @@ function OrderMenuCard({
   };
 
   const addToShoppingCarHandler = () => {
-    const isTableIdExist = shoppingCar.some((item) => {
+    const isTableIdExist = temporary.some((item) => {
       return item.tableId === tableId;
     });
 
     if (isTableIdExist) {
-      const updatedShoppingCar = shoppingCar.map((item) => {
+      const updatedShoppingCar = temporary.map((item) => {
         if (item.tableId === tableId) {
-          const existingItem = item.items.find(
+          const existingItem = item.shoppingCar.find(
             (product) => product.productId === productId
           );
           if (existingItem) {
             existingItem.quantity += quantity;
           } else {
-            item.items.push({
+            item.shoppingCar.push({
               productId: productId,
               name: name,
               quantity: quantity,
@@ -66,14 +66,14 @@ function OrderMenuCard({
         return item;
       });
 
-      setShoppingCar(updatedShoppingCar);
+      setTemporary(updatedShoppingCar);
       setQuantity(0);
     } else {
-      setShoppingCar([
-        ...shoppingCar,
+      setTemporary([
+        ...temporary,
         {
           tableId: tableId,
-          items: [
+          shoppingCar: [
             {
               productId: productId,
               name: name,

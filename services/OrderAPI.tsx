@@ -3,7 +3,7 @@ import { ShoppingCarProps } from "@/utils/type";
 
 interface PatchProps {
   tableId: string;
-  items: [
+  shoppingCar: [
     {
       productId: string;
       name: string;
@@ -25,9 +25,9 @@ export async function getShoppingCar(tableId: string) {
 
 export async function patchShoppingCar(props: PatchProps[]) {
   try {
-    const { items, tableId, totalAmount } = props[0];
+    const { shoppingCar, tableId, totalAmount } = props[0];
     const response = await axios.patch("/api/main", {
-      items,
+      shoppingCar,
       tableId,
       totalAmount,
     });

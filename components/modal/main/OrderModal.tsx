@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TiShoppingCart } from "react-icons/ti";
 
 import { getMenu } from "@/services/MenuAPI";
-import { MenuProps, ShoppingCarProps } from "@/utils/type";
+import { MenuProps, ShoppingCarProps, TableDataBase } from "@/utils/type";
 import OrderMenuCard from "@/components/card/OrderMenuCard";
 import ShoppingCarModal from "./ShoppingCarModal";
 import { Alert } from "@/utils/getSweetalert";
@@ -10,22 +10,23 @@ import style from "./OrderModal.module.scss";
 
 interface OrderModalProps {
   tableId: string;
-  shoppingCar: ShoppingCarProps[];
-  setShoppingCar: (shoppingCar: ShoppingCarProps[]) => void;
-  dataBase: ShoppingCarProps[];
-  setDataBase: (shoppingCar: ShoppingCarProps[]) => void;
+  temporary: ShoppingCarProps[];
+  setTemporary: (temporary: ShoppingCarProps[]) => void;
+  dataBase: TableDataBase;
+  setDataBase: (shoppingCar: TableDataBase) => void;
   onClick: () => void;
 }
 function OrderModal({
   onClick,
   tableId,
-  shoppingCar,
-  setShoppingCar,
+  temporary,
+  setTemporary,
   dataBase,
   setDataBase,
 }: OrderModalProps) {
   const [menuData, setMenuData] = useState([]);
   const [isShowShoppingCar, setIsShowShoppingCar] = useState(false);
+
   const fetchMenuData = async () => {
     try {
       const { data } = await getMenu();
@@ -42,8 +43,8 @@ function OrderModal({
     <>
       {isShowShoppingCar && (
         <ShoppingCarModal
-          shoppingCar={shoppingCar}
-          setShoppingCar={setShoppingCar}
+          temporary={temporary}
+          setTemporary={setTemporary}
           dataBase={dataBase}
           setDataBase={setDataBase}
           onClick={onClick}
@@ -56,7 +57,7 @@ function OrderModal({
           <button
             className={style.addImage__btn}
             onClick={() => {
-              if (shoppingCar.length === 0) {
+              if (temporary.length === 0) {
                 Alert.fire({
                   title: "您還沒有點餐！",
                   icon: "error",
@@ -82,8 +83,8 @@ function OrderModal({
                   selling={item.selling}
                   imageUrl={item.imageUrl}
                   isActive={item.isActive}
-                  shoppingCar={shoppingCar}
-                  setShoppingCar={setShoppingCar}
+                  temporary={temporary}
+                  setTemporary={setTemporary}
                 />
               );
             })}

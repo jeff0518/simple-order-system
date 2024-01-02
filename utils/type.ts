@@ -32,13 +32,26 @@ export interface CheckInProps {
 
 export interface ShoppingCarProps {
   tableId: string;
-  items: [{
+  shoppingCar: [{
     productId: string;
     name:string,
     quantity: number;
     selling:string;
   }];
   totalAmount:number;
+}
+
+export interface TableDataBase {
+  tableId: string;
+  shoppingCar: [
+    {
+      productId: string;
+      name: string;
+      quantity: number;
+      selling: string;
+    }
+  ];
+  totalAmount: number;
 }
 
 export type ContextProviderProps = {

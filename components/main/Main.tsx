@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import { getTableData } from "@/services/MainAPI";
+import { TableContext } from "@/context/TableData";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import TableCard from "./TableCard";
 
 import style from "./Main.module.scss";
 
-interface Props {
-  id: number;
-  total: number;
-  time: string;
-}
-
 function Main() {
   useAuthCheck();
   const [tableData, setTableData] = useState([]);
   const [update, setUpdate] = useState(true);
+  const { setTotalAmount } = useContext(TableContext);
 
   const fetchData = async () => {
     try {
@@ -30,6 +26,17 @@ function Main() {
     fetchData();
     setUpdate(true);
   }, [update]);
+
+  useEffect(() => {
+    if (tableData) {
+      const arr = tableData.map((item: any) => {
+        return item.isActive ? Number(item.totalAmount) : 0;
+      });
+
+      const totalAmountSum = arr.reduce((acc, arr) => acc + arr, 0);
+      setTotalAmount(totalAmountSum);
+    }
+  }, [tableData]);
   return (
     <div className={style.main_container}>
       {tableData &&
@@ -39,6 +46,7 @@ function Main() {
               key={item.tableId}
               isActive={item.isActive}
               tableId={item.tableId}
+              tableDataBase={item}
               totalAmount={item.isActive ? item.totalAmount : "0"}
               diningTime={item.isActive ? item.diningTime : "未點餐"}
               setUpdate={setUpdate}

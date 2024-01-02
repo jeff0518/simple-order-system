@@ -50,7 +50,7 @@ function Burger() {
                 商品內容
               </Link>
             </li>
-            <li className={`${style.nav_item}`}>
+            {/* <li className={`${style.nav_item}`}>
               <Link
                 href="/data"
                 className={style.nav_link}
@@ -58,7 +58,7 @@ function Burger() {
               >
                 數據資料庫
               </Link>
-            </li>
+            </li> */}
             <li className={`${style.nav_item}`}>
               <Link
                 href="/member-management"

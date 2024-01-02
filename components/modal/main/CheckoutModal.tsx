@@ -5,14 +5,14 @@ import InfoCard from "@/components/card/InfoCard";
 import Loading from "@/components/loading/Loading";
 import { getShoppingCar, getCheckout } from "@/services/OrderAPI";
 import { Checkout, Toast } from "@/utils/getSweetalert";
-import { ShoppingCarProps } from "@/utils/type";
+import { ShoppingCarProps, TableDataBase } from "@/utils/type";
 import style from "./CheckoutModal.module.scss";
 
 interface CheckoutProps {
   tableId: string;
   onClick: () => void;
-  setShoppingCar: (shoppingCar: ShoppingCarProps[]) => void;
-  setDataBase: (shoppingCar: ShoppingCarProps[]) => void;
+  setTemporary: (temporary: ShoppingCarProps[]) => void;
+  setDataBase: (shoppingCar: TableDataBase) => void;
 }
 
 interface CheckoutData {
@@ -32,7 +32,7 @@ function CheckoutModal({
   tableId,
   onClick,
   setDataBase,
-  setShoppingCar,
+  setTemporary,
 }: CheckoutProps) {
   const [checkoutData, setCheckoutData] = useState<CheckoutData | undefined>();
   const [isLoading, setIsLoading] = useState(true);
@@ -77,10 +77,10 @@ function CheckoutModal({
 
   useEffect(() => {
     if (isOrderPlaced) {
-      setShoppingCar([]);
-      setDataBase([]);
+      setTemporary([]);
+      // setDataBase([]);
     }
-  }, [isOrderPlaced, setShoppingCar, setDataBase]);
+  }, [isOrderPlaced, setTemporary, setDataBase]);
   return (
     <>
       {isLoading && <Loading />}
