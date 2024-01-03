@@ -28,7 +28,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       { numberId: numberId, "clockRecords.date": today },
       {
         $set: {
-          "clockRecords.$.clockOut": new Date().toLocaleTimeString(),
+          "clockRecords.$.clockOut": new Date().toLocaleTimeString("zh-Tw"),
         },
       }
     );
@@ -40,7 +40,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           clockRecords: {
             date: today,
             clockIn: "",
-            clockOut: new Date().toLocaleTimeString(),
+            clockOut: new Date().toLocaleTimeString("zh-Tw"),
           },
         },
       }

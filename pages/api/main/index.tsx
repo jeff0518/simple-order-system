@@ -40,7 +40,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
               isActive: true,
               totalAmount: totalAmount,
               shoppingCar: shoppingCar,
-              diningTime: new Date().toLocaleTimeString(),
+              diningTime: new Date().toLocaleTimeString("zh-Tw"),
             },
           }
         );
