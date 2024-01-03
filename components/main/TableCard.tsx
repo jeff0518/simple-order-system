@@ -11,7 +11,7 @@ import style from "./TableCard.module.scss";
 interface TableCardProps {
   tableId: string;
   totalAmount: number;
-  tableDataBase: any;
+  tableDataBase: TableDataBase;
   diningTime: string;
   isActive: boolean;
   setUpdate: (perv: boolean) => void;
