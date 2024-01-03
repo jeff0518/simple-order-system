@@ -9,7 +9,7 @@ import style from "./ShoppingCarModal.module.scss";
 interface ShoppingCarModalProps {
   temporary: ShoppingCarProps[];
   setTemporary: (shoppingCar: ShoppingCarProps[]) => void;
-  dataBase: TableDataBase;
+  dataBase: TableDataBase[];
   setDataBase: any;
   setIsShowShoppingCar: (prev: boolean) => void;
   onClick: () => void;
@@ -34,14 +34,21 @@ function ShoppingCarModal({
   };
 
   const uploadShoppingCar = () => {
+    console.log(dataBase);
+    console.log(dataBase[0].totalAmount);
     let newAmount =
-      Number(dataBase.totalAmount) + Number(temporary[0].totalAmount);
-    if (dataBase.shoppingCar.length >= 1) {
-      let newItems = dataBase.shoppingCar;
+      Number(dataBase[0].totalAmount) + Number(temporary[0].totalAmount);
+    console.log(
+      "Number(dataBase.totalAmount)",
+      Number(dataBase[0].totalAmount)
+    );
+    console.log("newAmount: ", newAmount);
+    if (dataBase[0].shoppingCar.length >= 0) {
+      let newItems = dataBase[0].shoppingCar;
 
       temporary[0].shoppingCar.map((item) => {
         let fount = false;
-        const dataBaseItem = dataBase.shoppingCar;
+        const dataBaseItem = dataBase[0].shoppingCar;
 
         for (let i = 0; i < dataBaseItem.length; i++) {
           if (item.productId === dataBaseItem[i].productId) {
@@ -66,6 +73,7 @@ function ShoppingCarModal({
       uploadData(updatedShoppingCar);
       setDataBase(updatedShoppingCar);
     } else {
+      console.log("else的newAmount", newAmount);
       const updatedShoppingCar = [
         {
           shoppingCar: shoppingCar,

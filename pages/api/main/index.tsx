@@ -1,6 +1,3 @@
-import { timeOptions } from "@/utils/getTimeOptions";
-import moment from "moment";
-
 export const config = {
   api: {
     externalResolver: true,
@@ -9,6 +6,8 @@ export const config = {
 
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
+import moment from "moment";
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const client = await connectToDatabase();
   const db = client.db();
@@ -25,7 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "PATCH") {
     const { shoppingCar, tableId, totalAmount } = req.body;
-    const diningTime = moment().format("l, LT");
+    const diningTime = moment().format("LT");
     try {
       const existingTable = await db
         .collection("table")

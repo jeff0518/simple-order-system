@@ -38,7 +38,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         {
           $set: {
             isActive: false,
-            totalAmount: "",
+            totalAmount: 0,
             shoppingCar: [],
             diningTime: "",
           },

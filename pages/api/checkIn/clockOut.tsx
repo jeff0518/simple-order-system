@@ -6,6 +6,7 @@ export const config = {
 
 import { connectToDatabase } from "@/services/db";
 import type { NextApiRequest, NextApiResponse } from "next";
+import moment from "moment";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -18,6 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const client = await connectToDatabase();
   const db = client.db();
   const today = new Date().toLocaleDateString("zh-Tw");
+  const clockOutTime = moment().format("LT");
 
   const existingDate = await db
     .collection("checkIn")
@@ -28,7 +30,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       { numberId: numberId, "clockRecords.date": today },
       {
         $set: {
-          "clockRecords.$.clockOut": new Date().toLocaleTimeString("zh-Tw"),
+          "clockRecords.$.clockOut": clockOutTime,
         },
       }
     );
@@ -40,7 +42,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           clockRecords: {
             date: today,
             clockIn: "",
-            clockOut: new Date().toLocaleTimeString("zh-Tw"),
+            clockOut: clockOutTime,
           },
         },
       }
