@@ -34,15 +34,9 @@ function ShoppingCarModal({
   };
 
   const uploadShoppingCar = () => {
-    console.log(dataBase);
-    console.log(dataBase[0].totalAmount);
     let newAmount =
       Number(dataBase[0].totalAmount) + Number(temporary[0].totalAmount);
-    console.log(
-      "Number(dataBase.totalAmount)",
-      Number(dataBase[0].totalAmount)
-    );
-    console.log("newAmount: ", newAmount);
+
     if (dataBase[0].shoppingCar.length >= 0) {
       let newItems = dataBase[0].shoppingCar;
 
@@ -108,7 +102,6 @@ function ShoppingCarModal({
         });
         uploadShoppingCar();
         closeShoppingCarHandler();
-        // setIsShowShoppingCar(false);
         onClick();
       }
     });
