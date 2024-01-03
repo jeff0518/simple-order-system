@@ -11,7 +11,7 @@ import style from "./TableCard.module.scss";
 interface TableCardProps {
   tableId: string;
   totalAmount: number;
-  tableDataBase: TableDataBase;
+  tableDataBase: any;
   diningTime: string;
   isActive: boolean;
   setUpdate: (perv: boolean) => void;
@@ -27,7 +27,7 @@ function TableCard(props: TableCardProps) {
     setUpdate,
   } = props;
   const [temporary, setTemporary] = useState<ShoppingCarProps[]>([]);
-  const [dataBase, setDataBase] = useState<TableDataBase>(tableDataBase);
+  const [dataBase, setDataBase] = useState<TableDataBase[]>([]);
   const [isShowOrderModal, setIsShowOrderModal] = useState(false);
   const [isShowCheckout, setIsShowCheckout] = useState(false);
 
@@ -50,7 +50,8 @@ function TableCard(props: TableCardProps) {
   };
 
   useEffect(() => {
-    setDataBase(tableDataBase);
+    const arrayTable = [tableDataBase];
+    setDataBase(arrayTable);
   }, []);
 
   return (

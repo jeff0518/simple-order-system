@@ -20,7 +20,6 @@ function ShoppingCarModal({
   setTemporary,
   dataBase,
   setDataBase,
-  setIsShowShoppingCar,
   onClick,
 }: ShoppingCarModalProps) {
   const { shoppingCar, totalAmount, tableId } = temporary[0];

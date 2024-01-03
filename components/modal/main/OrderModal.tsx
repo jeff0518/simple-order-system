@@ -12,8 +12,8 @@ interface OrderModalProps {
   tableId: string;
   temporary: ShoppingCarProps[];
   setTemporary: (temporary: ShoppingCarProps[]) => void;
-  dataBase: TableDataBase;
-  setDataBase: (shoppingCar: TableDataBase) => void;
+  dataBase: TableDataBase[];
+  setDataBase: (shoppingCar: TableDataBase[]) => void;
   onClick: () => void;
 }
 function OrderModal({
@@ -26,7 +26,6 @@ function OrderModal({
 }: OrderModalProps) {
   const [menuData, setMenuData] = useState([]);
   const [isShowShoppingCar, setIsShowShoppingCar] = useState(false);
-
   const fetchMenuData = async () => {
     try {
       const { data } = await getMenu();
