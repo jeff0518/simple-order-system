@@ -1,3 +1,6 @@
+import { timeOptions } from "@/utils/getTimeOptions";
+import moment from "moment";
+
 export const config = {
   api: {
     externalResolver: true,
@@ -22,6 +25,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "PATCH") {
     const { shoppingCar, tableId, totalAmount } = req.body;
+    const diningTime = moment().format("l, LT");
     try {
       const existingTable = await db
         .collection("table")
@@ -40,7 +44,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
               isActive: true,
               totalAmount: totalAmount,
               shoppingCar: shoppingCar,
-              diningTime: new Date().toLocaleTimeString("zh-Tw"),
+              diningTime: diningTime,
             },
           }
         );
