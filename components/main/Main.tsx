@@ -4,11 +4,13 @@ import { getTableData } from "@/services/MainAPI";
 import { TableContext } from "@/context/TableData";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import TableCard from "./TableCard";
+import Loading from "@/components/loading/Loading";
 
 import style from "./Main.module.scss";
 
 function Main() {
   useAuthCheck();
+  const [isLoading, setIsLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [update, setUpdate] = useState(true);
   const { setTotalAmount } = useContext(TableContext);
@@ -17,6 +19,7 @@ function Main() {
     try {
       const data = await getTableData();
       setTableData(data.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +42,7 @@ function Main() {
   }, [tableData]);
   return (
     <div className={style.main_container}>
+      {isLoading && <Loading />}
       {tableData &&
         tableData.map((item: any) => {
           return (

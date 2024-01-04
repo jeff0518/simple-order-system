@@ -1,5 +1,3 @@
-// import { useSession } from "next-auth/react";
-// import { useRouter } from "next/router";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import Main from "@/components/main/Main";
 import Loading from "@/components/loading/Loading";

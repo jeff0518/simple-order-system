@@ -1,40 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Simple Order System
 
-## Getting Started
+Simple Order System 是一款簡單的商家使用的管理系統，目前可以執行點餐、菜單管理、員工管理以及會員管理等功能。
 
-First, run the development server:
+![主頁畫面](https://imgur.com/mhqabQW)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 主要功能
+
+* 1.商家可以在系統上面為客人點餐。
+* 2.商家可以在系統上新增菜單、修改菜單、刪除菜單，如果商品賣完也可以選擇鎖住商品。
+* 3.商家可以在系統上做簡易的員工管理，可以新增員工、刪除員工、員工的資料變更以及查看員工出勤。
+* 4.商家可以在系統上查看會員資料，並且新增會員的消費記錄。
+* 5.員工可以在不登錄系統的情況下進行員工上下班的打卡。
+
+## 本地安裝流程
+* 開啟終端機(Terminal)，並確認已安裝 node.js 與 npm
+* 在終端機輸入以下指令，將本專案 clone 到本機電腦
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+git clone https://github.com/jeff0518/simple-order-system.git
+```
+* 透過終端機進入存放此專案的資料夾後，輸入以下指令安裝 npm 套件
+```
+npm install
+```
+* 安裝完畢後請輸入以下指令執行專案
+```
+npm start
+```
+* 打開瀏覽器輸入以下網址即可開始使用本專案
+```
+http://localhost:3000/
+```
+## 開發工具
+* "next": "14.0.4"
+* "next-auth": "4.24.5",
+* "react": "18.2.0"
+* "react-dom": "18.2.0"
+* "react-icons": "4.11.0"
+* "typescript": "5"
+* "@types/react": "18"
+* "@types/node": "20"
+* "axios": "1.6.2"
+* "moment": "2.29.4"
+* "mongoose": "8.0.0"
+* "sass": "1.69.5"
+* "sweetalert2": "11.10.1"
