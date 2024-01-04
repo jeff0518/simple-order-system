@@ -2,7 +2,7 @@
 
 Simple Order System 是一款簡單的商家使用的管理系統，目前可以執行點餐、菜單管理、員工管理以及會員管理等功能。
 
-![主頁畫面](https://imgur.com/mhqabQW)
+![Imgur](https://i.imgur.com/mhqabQW.png)
 
 ## 主要功能
 
