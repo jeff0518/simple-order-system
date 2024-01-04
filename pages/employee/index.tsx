@@ -6,6 +6,7 @@ import { getAllEmployeeData } from "@/services/EmployeeDataAPI";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import ListCard from "@/components/card/ListCard";
 import AddEmployeeModal from "@/components/modal/employee/AddEmployeeModal";
+import Loading from "@/components/loading/Loading";
 
 import style from "./index.module.scss";
 
@@ -14,11 +15,13 @@ function Employee() {
   const [isAddEmployee, setIsAddEmployee] = useState(false);
   const [employeeData, setEmployeeData] = useState<EmployeeProps[]>([]);
   const [defaultValue, setDefaultValue] = useState<string>("00001");
+  const [isLoading, setIsLoading] = useState(true);
   useAuthCheck();
   const fetchData = async () => {
     try {
       const data = await getAllEmployeeData();
       setEmployeeData(data.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +58,7 @@ function Employee() {
         />
       )}
       <div className={style.employee_container}>
+        {isLoading && <Loading />}
         <div className={style.addImage}>
           <button
             className={style.addImage__btn}

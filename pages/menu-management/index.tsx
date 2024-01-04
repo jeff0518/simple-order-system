@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { IoMdAdd } from "react-icons/io";
 
@@ -7,18 +7,21 @@ import { getMenu } from "@/services/MenuAPI";
 import { MenuProps } from "@/utils/type";
 import { MenuContext } from "@/context/MenuContext";
 import MenuCard from "@/components/card/MenuCard";
+import Loading from "@/components/loading/Loading";
 
 import style from "./index.module.scss";
 
 function MenuManagement() {
   useAuthCheck();
   const { menuData, setMenuData, dataUpdated } = useContext(MenuContext);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const fetchData = async () => {
     try {
       const data = await getMenu();
       setMenuData(data.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +33,7 @@ function MenuManagement() {
   return (
     <>
       <div className={style.menuManagement_container}>
+        {isLoading && <Loading />}
         <div className={style.addImage}>
           <button
             className={style.addImage__btn}
