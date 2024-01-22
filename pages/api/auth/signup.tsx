@@ -25,7 +25,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const db = client.db();
 
   const existingUser = await db
-    .collection("account")
+    .collection("user")
     .findOne({ account: account });
   if (existingUser) {
     res.status(422).json({ message: "用戶已存在" });
