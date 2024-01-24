@@ -7,8 +7,17 @@ export const config = {
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
 import moment from "moment";
+import Cors from "cors";
+import initMiddleware from "../../../utils/initMiddleware";
+
+const cors = initMiddleware(
+  Cors({
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
+  })
+);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await cors(req, res);
   const client = await connectToDatabase();
   const db = client.db();
 
