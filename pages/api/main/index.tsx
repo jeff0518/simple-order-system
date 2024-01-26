@@ -15,7 +15,6 @@ const cors = initMiddleware(
     methods: ["GET", "POST", "PATCH", "OPTIONS"],
   })
 );
-
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await cors(req, res);
   const client = await connectToDatabase();
