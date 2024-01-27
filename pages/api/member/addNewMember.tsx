@@ -36,7 +36,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     });
     res.status(201).json({ message: "成功建立會員資料" });
   } else {
-    res.status(201).json({ message: "已經有建立會員資料" });
+    res.status(202).json({ message: "已經有建立會員資料" });
   }
   client.close();
 }
