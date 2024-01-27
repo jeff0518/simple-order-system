@@ -11,7 +11,7 @@ import initMiddleware from "../../../utils/initMiddleware";
 
 const cors = initMiddleware(
   Cors({
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
   })
 );
 
