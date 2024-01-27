@@ -29,7 +29,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         .findOne({ phoneNumber: memberId[0] });
 
       if (!result) {
-        res.status(404).json({ error: "找不到此會員" });
+        res.status(404).json({ error: "noFound" });
       } else {
         res.status(200).json({ data: result });
       }
