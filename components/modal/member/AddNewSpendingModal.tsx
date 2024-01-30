@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import moment from "moment";
 
 import { FormEvent } from "@/utils/type";
 import { Toast } from "@/utils/getSweetalert";
@@ -27,12 +28,16 @@ function AddNewSpendingModal({ phoneNumber, onClick }: SpendingProps) {
       return;
     }
 
+    const time = moment().format("hmm");
+
     const newDate = dateInputRef.current.value;
     const newPoint = pointInputRef.current.value;
+    const newSpendingId = newDate + time;
 
     try {
       const result = await createNewSpending({
         phoneNumber,
+        newSpendingId,
         newPoint,
         newDate,
       });

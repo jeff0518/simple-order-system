@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { phoneNumber, newPoint, newDate } = req.body;
+  const { phoneNumber, newPoint, newDate, newSpendingId } = req.body;
 
   const client = await connectToDatabase();
   const db = client.db();
@@ -25,6 +25,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       {
         $push: {
           spendingRecords: {
+            spendingId: newSpendingId,
             date: newDate,
             point: newPoint,
           },

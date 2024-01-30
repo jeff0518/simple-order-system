@@ -8,6 +8,7 @@ interface MemberProps {
   point?: string;
   newDate?: string;
   newPoint?: string;
+  newSpendingId?: string;
   // spendingRecords?: [
   //   {
   //     newDate: string;
@@ -45,12 +46,14 @@ export async function getMemberData(phoneNumber: string) {
 
 export async function createNewSpending({
   phoneNumber,
+  newSpendingId,
   newDate,
   newPoint,
 }: MemberProps) {
   try {
     const { data } = await axios.post("/api/member/addNewSpending", {
       phoneNumber,
+      newSpendingId,
       newDate,
       newPoint,
     });
