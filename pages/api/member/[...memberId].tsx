@@ -34,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         res.status(200).json({ data: result });
       }
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "internalError" });
     }
   }
 
@@ -53,12 +53,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       );
 
       if (result.modifiedCount === 0) {
-        return res.status(404).json({ error: "找不到此員工" });
+        return res.status(404).json({ error: "noFound" });
       }
 
-      res.status(200).json({ message: "員工資料已成功更新" });
+      res.status(200).json({ message: "會員資料已成功更新" });
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "internalError" });
     }
   }
 }
