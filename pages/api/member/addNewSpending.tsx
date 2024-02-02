@@ -6,8 +6,17 @@ export const config = {
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "@/services/db";
+import Cors from "cors";
+import initMiddleware from "../../../utils/initMiddleware";
+
+const cors = initMiddleware(
+  Cors({
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
+  })
+);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await cors(req, res);
   const { phoneNumber, newPoint, newDate, newSpendingId } = req.body;
 
   const client = await connectToDatabase();
