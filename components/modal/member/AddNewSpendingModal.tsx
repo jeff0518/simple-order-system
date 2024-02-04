@@ -30,7 +30,7 @@ function AddNewSpendingModal({ phoneNumber, onClick }: SpendingProps) {
 
     const time = moment().format("hmmss");
 
-    const newDate = dateInputRef.current.value;
+    const newDate = moment(dateInputRef.current.value).format("YYYY/MM/DD");
     const newPoint = pointInputRef.current.value;
     const newSpendingId = newDate + time;
 
