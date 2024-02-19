@@ -39,6 +39,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             point: newPoint,
           },
         },
+        $set: {
+          count: existingFile.count + 1,
+          point: existingFile.point + newPoint,
+        },
       }
     );
     res.status(201).json({ message: "成功新增消費紀錄" });
