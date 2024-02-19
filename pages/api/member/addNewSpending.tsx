@@ -41,7 +41,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         },
         $set: {
           count: existingFile.count + 1,
-          point: existingFile.point + newPoint,
+          point: +existingFile.point + +newPoint,
         },
       }
     );
